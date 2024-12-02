@@ -1,0 +1,9 @@
+README.md
+setup.py
+factorial_dijkstra/__init__.py
+factorial_dijkstra/dijkstra.py
+factorial_dijkstra/factorial.py
+factorial_dijkstra.egg-info/PKG-INFO
+factorial_dijkstra.egg-info/SOURCES.txt
+factorial_dijkstra.egg-info/dependency_links.txt
+factorial_dijkstra.egg-info/top_level.txt
