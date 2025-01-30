@@ -1,0 +1,18 @@
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_otp_verification" model="mail.template">
+            <field name="name">Supplier OTP Verification</field>
+            <field name="email_from">${object.company_id.email or 'noreply@yourdomain.com'}</field>
+            <field name="email_to">${email_to}</field>
+            <field name="subject">Your OTP for Supplier Registration</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello,</p>
+                <p>Your One-Time Password (OTP) for supplier registration is:</p>
+                <h2 style="text-align: center; color: #3498db;">${object.otp}</h2>
+                <p>This OTP is valid for only a few minutes. Do not share it with anyone.</p>
+                <p>Thank you.</p>
+            ]]></field>
+            <field name="model_id" ref="base.model_res_users" />
+        </record>
+    </data>
+</odoo>
