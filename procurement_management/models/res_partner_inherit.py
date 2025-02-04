@@ -34,3 +34,10 @@ class MySupplier(models.Model):
     bank_letter_indicating_bank_account = fields.Binary(string='Bank Letter indicating Bank Account')
     past_2_years_audited_financial_statements = fields.Binary(string='Past 2 Years Audited Financial Statements')
     other_certifications = fields.Binary(string='Other Certifications')
+    is_blacklisted = fields.Boolean(string="Blacklisted", compute="_compute_blacklist", store=True)
+    
+    @api.depends('email')
+    def _compute_blacklist(self):
+        for record in self:
+            blacklist_entry = self.env['mail.blacklist'].sudo().search([('email', '=', record.email)], limit=1)
+            record.is_blacklisted = bool(blacklist_entry)

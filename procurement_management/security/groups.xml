@@ -1,0 +1,13 @@
+<odoo>
+    <record id="group_supplier_reviewer" model="res.groups">
+        <field name="name">Reviewer</field>
+        <field name="category_id" ref="base.module_category_tools" />
+
+    </record>
+
+    <record id="group_supplier_approver" model="res.groups">
+        <field name="name">Approver</field>
+        <field name="category_id" ref="base.module_category_tools" />
+
+    </record>
+</odoo>

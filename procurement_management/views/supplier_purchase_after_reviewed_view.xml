@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="supplier_registration_form_view_reviewed" model="ir.ui.view">
+        <field name="name">supplier.registration.form.reviewed</field>
+        <field name="model">supplier.registration</field>
+        <field name="arch" type="xml">
+            <form string="Reviewed Vendor">
+                <sheet>
+                    <header>
+                        <button name="action_submit" string="Submit" type="object"
+                            class="oe_highlight"
+                            invisible="[['state', '!=', 'draft']]" />
+
+                        <button name="action_review" string="Review" type="object"
+                            class="oe_highlight"
+                            groups="procurement_management.group_supplier_reviewer"
+                            condition="state == 'submitted'" />
+
+                        <button name="action_reject" string="Reject" type="object"
+                            class="oe_highlight"
+                            groups="procurement_management.group_supplier_reviewer"
+                            condition="state == 'submitted'" />
+
+                        <button name="action_approve" string="Approve" type="object"
+                            class="oe_highlight"
+                            groups="procurement_management.group_supplier_approver"
+                            condition="state == 'reviewed'" />
+
+                        <button name="action_final_reject" string="Final Reject" type="object"
+                            class="oe_highlight"
+                            groups="procurement_management.group_supplier_approver"
+                            condition="state == 'reviewed'" />
+
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <group>
+                        <group>
+                            <field name="company_name" />
+                            <field name="company_type_category" />
+                            <field name="trade_license_number" />
+                            <field name="tax_identification_number" />
+                        </group>
+                        <group>
+                            <field name="company_registered_address" />
+                            <field name="company_alternate_address" />
+                            <field name="commencement_date" />
+                            <field name="expiry_date" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="supplier_registration_tree_view_reviewed" model="ir.ui.view">
+        <field name="name">supplier.registration.tree.reviewed</field>
+        <field name="model">supplier.registration</field>
+        <field name="arch" type="xml">
+            <tree string="Reviewed Vendors">
+                <field name="company_name" />
+                <field name="trade_license_number" />
+                <field name="tax_identification_number" />
+                <field name="expiry_date" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="supplier_registration_kanban_view_reviewed" model="ir.ui.view">
+        <field name="name">supplier.registration.kanban.reviewed</field>
+        <field name="model">supplier.registration</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="company_name" />
+                <field name="trade_license_number" />
+                <field name="state" />
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card shadow-sm p-3">
+                            <strong class="text-dark">
+                                <t t-esc="record.company_name.raw_value" />
+                            </strong>
+                            <br />
+                            <small class="text-muted">License No: <t
+                                    t-esc="record.trade_license_number.raw_value" /></small>
+                            <br />
+                            <span class="badge badge-info">Reviewed</span>
+
+                            <div class="o_kanban_footer mt-2">
+                                <button type="object" name="action_approve"
+                                    class="btn btn-sm btn-outline-success"
+                                    role="button">
+                                    Approve
+                                </button>
+                                <button type="object" name="action_final_reject"
+                                    class="btn btn-sm btn-outline-danger"
+                                    role="button">
+                                    Final Reject
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_reviewed_vendors" model="ir.actions.act_window">
+        <field name="name">Reviewed Vendors</field>
+        <field name="res_model">supplier.registration</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('state', '=', 'reviewed')]</field>
+    </record>
+
+    <menuitem id="menu_reviewed_vendors" name="Reviewed Vendors"
+        parent="purchase.menu_procurement_management"
+        action="action_reviewed_vendors" sequence="20"
+        groups="procurement_management.group_supplier_approver" />
+
+</odoo>

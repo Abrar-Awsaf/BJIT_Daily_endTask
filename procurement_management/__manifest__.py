@@ -22,11 +22,13 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/groups.xml',
+        'security/ir.model.access.csv',
         'views/email_templates.xml',
         'views/supplier_portal.xml',
         'views/supplier_registration.xml',
         'views/supplier_purchase_view.xml',
+        'views/supplier_purchase_after_reviewed_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

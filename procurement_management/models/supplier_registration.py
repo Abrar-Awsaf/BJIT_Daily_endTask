@@ -68,11 +68,32 @@ class SupplierRegistration(models.TransientModel):
     bank_letter_indicating_bank_account = fields.Binary(string='Bank Letter indicating Bank Account')
     past_2_years_audited_financial_statements = fields.Binary(string='Past 2 Years Audited Financial Statements')
     other_certifications = fields.Binary(string='Other Certifications')
-    state = fields.Selection(
-        [('draft', 'Draft'), ('submitted', 'Submitted'), ('approved', 'Approved'), ('rejected', 'Rejected')],
-        string='State', default='draft')
+    
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('submitted', 'Submitted'),
+        ('reviewed', 'Reviewed'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('final_rejected', 'Final Rejected'),
+        ('blacklisted', 'Blacklisted')
+    ], string='State', default='draft')
+    
+    reject_reason = fields.Char(string="Rejection/Blacklist Reason")
+    
+    def action_review(self):
+        if not self.env.user.has_group('procurement_management.group_supplier_reviewer'):
+            raise UserError("Only users with Reviewer role can review the supplier.")
+        self.state = 'reviewed'
 
     def action_approve(self):
+        
+        if not self.env.user.has_group('procurement_management.group_supplier_approver'):
+            raise UserError("Only users with Approver role can approve the supplier.")
+        
+        if self.state != 'reviewed':
+            raise UserError("Only reviewed vendors can be approved.")
+    
         vals = {
             'name': self.company_name or 'N/A',
             'email': self.email or 'N/A',
@@ -171,7 +192,30 @@ class SupplierRegistration(models.TransientModel):
         self.state = 'approved'
 
     def action_reject(self):
+        if not self.env.user.has_group('procurement_management.group_supplier_reviewer'):
+            raise UserError("Only users with Reviewer role can reject the supplier.")
         self.state = 'rejected'
+        
+    def action_blacklist(self):
+        if not self.env.user.has_group('procurement_management.group_supplier_reviewer'):
+            raise UserError("Only Reviewers can blacklist a supplier.")
+
+        # if not self.reject_reason:
+        #     raise UserError("Please provide a reason for blacklisting.")
+
+        # Add supplier to mail.blacklist (without reason)
+        blacklist = self.env['mail.blacklist'].sudo().create({
+            'email': self.email  # Reason is not supported in Odoo 17
+        })
+
+        self.state = 'blacklisted'
 
     def action_submit(self):
         self.state = 'submitted'
+        
+    def action_final_reject(self):
+        if not self.env.user.has_group('procurement_management.group_supplier_approver'):
+            raise UserError("Only users with Approver role can finalize rejection.")
+        if self.state != 'reviewed':
+            raise UserError("Only reviewed suppliers can be finally rejected.")
+        self.state = 'final_rejected'

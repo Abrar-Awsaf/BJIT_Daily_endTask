@@ -4,7 +4,7 @@
         <field name="name">Vendor Registration Success</field>
         <field name="model_id" ref="model_res_partner" />
         <field name="subject">Vendor Registration Successful</field>
-        <!-- <field name="email_from">abrar.awsaf@bjitacademy.com</field> -->
+        <field name="email_from">abrar.awsaf@bjitacademy.com</field>
         <field name="email_to">{{object.email}}</field>
         <field name="body_html" type="html">
             <h3> Dear <span t-field="object.name" />

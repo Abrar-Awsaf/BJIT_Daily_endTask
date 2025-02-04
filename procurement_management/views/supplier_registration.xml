@@ -196,13 +196,23 @@
                                                 name="commencement_date"
                                                 style="background-color: #ccffcc;"
                                             />
+                                            <small id="commencement_date_error_msg"
+                                                style="color: red; display: none;">
+                                                The commencement date cannot be today or a future
+                                                date.
+                                            </small>
                                         </div>
                                         <div class="form-group">
                                             <label for="expiry_date">Expiry Date</label>
                                             <input type="date" class="form-control" id="expiry_date"
                                                 name="expiry_date"
                                                 style="background-color: #ccffcc;" />
+                                            <small id="expiry_date_error_msg"
+                                                style="color: red; display: none;">
+                                                The expiry date must be a future date.
+                                            </small>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="row col-md-12">
@@ -654,6 +664,12 @@
                     </form>
                 </div>
                 <script src="/procurement_management/static/src/js/form_navigation.js">Navigation
+                    Script</script>
+                <script src="/procurement_management/static/src/js/form_validation.js">Validation
+                    Script</script>
+                <script src="/procurement_management/static/src/js/form_validation_client.js">Submission
+                    Script</script>
+                <script src="/procurement_management/static/src/js/form_validation_files.js">Files
                     Script</script>
             </t>
 
