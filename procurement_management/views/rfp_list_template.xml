@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <!-- Portal Entry for RFPs in Portal Menu -->
+        <template id="portal_rfp_list" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[@id='portal_vendor_category']" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
+                    <t t-set="title">Request for Purchase (RFP)</t>
+                    <t t-set="text">View and Submit Quotations</t>
+                    <t t-set="url" t-value="'/my/rfp'" />
+                    <t t-set="config_card" t-value="True" />
+                </t>
+            </xpath>
+        </template>
+
+        <!-- RFP List View -->
+        <template id="rfp_list_template" name="RFP List">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-4">
+                    <h2 class="text-center text-primary">Request for Purchase (RFP)</h2>
+
+                    <t t-if="rfps">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>RFP Number</th>
+                                        <th>Required Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="rfps" t-as="rfp">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="rfp.rfp_number" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="rfp.expiry_date" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="rfp.total_amount" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="rfp.status" />
+                                            </td>
+                                            <td>
+                                                <a t-att-href="'/my/rfp/submit/' + str(rfp.id)"
+                                                    class="btn btn-primary">Submit Quotation</a>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <p class="text-center text-muted">No open RFPs available.</p>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

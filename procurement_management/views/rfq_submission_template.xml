@@ -1,0 +1,30 @@
+<odoo>
+    <!-- <template id="rfq_submission_template" name="RFQ Submission">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2 class="text-center text-primary">Submit Quotation</h2>
+
+                <form action="/my/rfp/submit" method="post">
+                    <input type="hidden" name="rfp_id" t-att-value="rfp.id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Expected Delivery Date</label>
+                        <input type="date" name="expected_delivery_date" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Terms and Conditions</label>
+                        <textarea name="terms_conditions" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Warranty Period (Months)</label>
+                        <input type="number" name="warranty_period" class="form-control" min="0" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Submit RFQ</button>
+                </form>
+            </div>
+        </t>
+    </template> -->
+</odoo>

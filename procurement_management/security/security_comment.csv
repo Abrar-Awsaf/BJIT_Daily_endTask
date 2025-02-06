@@ -1,2 +1,6 @@
 access_my_supplier_user,access_my_supplier,model_res_partner,,1,0,0,0
 access_my_supplier_manager,access_my_supplier_manager,model_res_partner,base.group_system,1,1,1,1
+
+access_rfp_product_line_reviewer,Reviewer Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_reviewer,1,1,1,0
+access_rfp_product_line_approver,Approver Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_approver,1,1,0,0
+access_rfp_product_line_admin,Administrator Access to RFP Product Line,model_rfp_product_line,base.group_system,1,1,1,1

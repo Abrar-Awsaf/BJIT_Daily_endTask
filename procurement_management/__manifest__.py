@@ -18,17 +18,21 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'portal', 'web', 'mail'],
+    'depends': ['base', 'portal', 'web', 'mail', 'purchase'],
 
     # always loaded
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
+        'views/ir_sequence.xml',
         'views/email_templates.xml',
         'views/supplier_portal.xml',
         'views/supplier_registration.xml',
         'views/supplier_purchase_view.xml',
         'views/supplier_purchase_after_reviewed_view.xml',
+        'views/reviewer_rfp.xml',
+        'views/rfp_list_template.xml',
+        'views/rfq_submission_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

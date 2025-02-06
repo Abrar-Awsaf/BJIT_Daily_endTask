@@ -7,7 +7,7 @@
                     <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
                     <t t-set="title">Supplier OTP Confirmation</t>
                     <t t-set="text">Secure Email Verification with OTP</t>
-                    <t t-set="url" t-value="'/my/supplier/register'" />
+                    <t t-set="url" t-value="'/my/supplier'" />
                     <t t-set="config_card" t-value="True" />
                 </t>
             </xpath>

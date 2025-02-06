@@ -204,9 +204,20 @@
                 <group expand="1" string="Group By">
                     <filter string="Approval Status" name="approval_status"
                         context="{'group_by':'state'}" />
+                    <filter string="Company Name" name="group_company_name"
+                        context="{'group_by':'company_name'}" />
+                    <filter string="Company Category" name="group_company_category"
+                        context="{'group_by':'company_type_category'}" />
                 </group>
                 <filter string="Waiting for approval" name="submitted"
                     domain="[('state','=','submitted')]" />
+                <filter string="Reviewed" name="reviewed" domain="[('state','=','reviewed')]" />
+                <filter string="Approved" name="approved" domain="[('state','=','approved')]" />
+                <filter string="Rejected" name="rejected" domain="[('state','=','rejected')]" />
+                <filter string="Final Rejected" name="final_rejected"
+                    domain="[('state','=','final_rejected')]" />
+                <filter string="Blacklisted" name="blacklisted"
+                    domain="[('state','=','blacklisted')]" />
             </search>
         </field>
     </record>
@@ -222,7 +233,8 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_card shadow-sm p-3">
+                        <!-- Enables clicking on the card to open Form view -->
+                        <div class="oe_kanban_global_click oe_kanban_card shadow-sm p-3">
                             <strong class="text-dark">
                                 <t t-esc="record.company_name.raw_value" />
                             </strong>
@@ -267,6 +279,7 @@
             </kanban>
         </field>
     </record>
+
 
     <record id="action_supplier_registration" model="ir.actions.act_window">
         <field name="name">Supplier Registration</field>

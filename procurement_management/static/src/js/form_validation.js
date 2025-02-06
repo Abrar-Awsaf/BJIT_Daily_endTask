@@ -21,6 +21,7 @@ document.getElementById("company_name").addEventListener("keyup", function (even
     if (companyName.length == 0) {
         errorMsg.style.display = "block";  // Show the error message
     } else {
+        print(errorMsg);
         errorMsg.style.display = "none";   // Hide the error message
     }
 });
