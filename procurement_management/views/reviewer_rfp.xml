@@ -52,7 +52,7 @@
                                         <field name="quantity" />
                                         <field name="unit_price" />
                                         <field name="subtotal_price" />
-                                        <field name="delivery_charges" />
+                                        <field name="delivery_charges_supplier" />
                                     </tree>
                                 </field>
                             </page>
@@ -70,6 +70,7 @@
             <field name="name">RFPs</field>
             <field name="res_model">rfp.management</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('create_uid', '=', uid)]</field>
         </record>
 
         <!-- RFP Menu for Reviewers -->

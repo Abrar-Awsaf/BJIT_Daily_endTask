@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+    <record id="rfq_submission_notification" model="mail.template">
+        <field name="name">RFQ Submission Notification</field>
+        <field name="model_id" ref="model_purchase_order" />  <!-- ✅ FIXED -->
+        <field name="subject">New RFQ Submitted for Your RFP</field>
+        <field name="email_from">no-reply@yourcompany.com</field>
+        <field name="email_to">${object.rfp_id.create_uid.email}</field>  <!-- ✅ FIXED -->
+        <field name="body_html" type="html">
+            <p>Dear <span t-field="object.rfp_id.create_uid.name"></span>,</p>  <!-- ✅ FIXED -->
+            <p>A new RFQ has been submitted for your RFP: <strong>
+                    <span t-field="object.rfp_id.rfp_number"></span>
+                </strong>. <!--
+                ✅ FIXED -->
+            </p>
+            <p>Please log in to review the quotation.</p>
+        </field>
+    </record>
+
     <record id="vendor_registration_confirmation" model="mail.template">
         <field name="name">Vendor Registration Success</field>
         <field name="model_id" ref="model_res_partner" />

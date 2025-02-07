@@ -1,30 +1,110 @@
 <odoo>
-    <!-- <template id="rfq_submission_template" name="RFQ Submission">
-        <t t-call="website.layout">
+    <template id="rfq_submission_template" name="RFQ Submission">
+        <t t-call="portal.portal_layout">
             <div class="container mt-4">
                 <h2 class="text-center text-primary">Submit Quotation</h2>
 
                 <form action="/my/rfp/submit" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
                     <input type="hidden" name="rfp_id" t-att-value="rfp.id" />
 
+                    <!-- Section: Product Line Items (Auto-Filled from RFP) -->
+                    <h4>Quotation Details</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price (Editable)</th>
+                                <th>Delivery Charges (Editable)</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product_lines">
+                            <t t-foreach="rfp.product_line_ids" t-as="line">
+                                <tr>
+                                    <!-- Product (Auto-filled & Read-Only) -->
+                                    <td>
+                                        <input type="text" class="form-control" name="product_name"
+                                            t-att-value="line.product_id.name"
+                                            readonly="true" />
+                                    </td>
+
+                                    <!-- Quantity (Auto-filled & Read-Only) -->
+                                    <td>
+                                        <input type="number" class="form-control quantity"
+                                            name="quantity"
+                                            t-att-value="line.quantity"
+                                            readonly="true" />
+                                    </td>
+
+                                    <!-- Unit Price (Editable) -->
+                                    <td>
+                                        <input type="number" class="form-control unit_price"
+                                            t-att-name="'unit_price_' + str(line.product_id.id)"
+                                            step="0.01"
+                                            required="true"
+                                            oninput="calculateTotal(this)" />
+                                    </td>
+
+
+                                    <!-- Delivery Charges (Editable) -->
+                                    <td>
+                                        <input type="number" class="form-control delivery_charges"
+                                            t-att-name="'delivery_charges_' + str(line.product_id.id)"
+                                            step="0.01"
+                                            required="true"
+                                            oninput="calculateTotal(this)" />
+                                    </td>
+
+
+                                    <!-- Total Price (Auto-calculated & Read-Only) -->
+                                    <td>
+                                        <input type="text" class="form-control total_price"
+                                            name="total_price"
+                                            readonly="true" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- Section: Additional Information -->
                     <div class="mb-3">
                         <label class="form-label">Expected Delivery Date</label>
-                        <input type="date" name="expected_delivery_date" class="form-control" />
+                        <input type="date" name="expected_delivery_date" class="form-control"
+                            t-att-value="rfp.expiry_date"
+                            readonly="true" />
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label">Terms and Conditions</label>
-                        <textarea name="terms_conditions" class="form-control" rows="4"></textarea>
-                    </div>
+                        <textarea name="terms_conditions" class="form-control" rows="4"
+                            required="true"></textarea>
+                    </div> -->
 
                     <div class="mb-3">
                         <label class="form-label">Warranty Period (Months)</label>
-                        <input type="number" name="warranty_period" class="form-control" min="0" />
+                        <input type="number" name="warranty_period" class="form-control" min="0"
+                            required="true" />
                     </div>
 
                     <button type="submit" class="btn btn-success w-100">Submit RFQ</button>
                 </form>
             </div>
         </t>
-    </template> -->
+
+        <!-- JavaScript to Auto-Calculate Total Price -->
+        <script>
+            function calculateTotal(input) {
+            let row = input.closest("tr");
+            let quantity = parseFloat(row.querySelector(".quantity").value);
+            let unitPrice = parseFloat(row.querySelector(".unit_price").value) || 0;
+            let deliveryCharge = parseFloat(row.querySelector(".delivery_charges").value) || 0;
+            let totalField = row.querySelector(".total_price");
+
+            totalField.value = (unitPrice * quantity + deliveryCharge).toFixed(2);
+            }
+        </script>
+    </template>
 </odoo>

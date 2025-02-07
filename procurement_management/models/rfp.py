@@ -19,7 +19,7 @@ class RFP(models.Model):
         ('closed', 'Closed'),
         ('recommendation', 'Recommendation'),
         ('accepted', 'Accepted')
-    ], string='Status', default='draft', tracking=True)
+    ], string='Status', default='draft', tracking=True,)
     
     # RFP Expiry Date: After this date, suppliers cannot submit RFQs
     expiry_date = fields.Date(string='Expiry Date', required=True, default=lambda self: fields.Date.today() + timedelta(days=7))
@@ -83,3 +83,37 @@ class RFP(models.Model):
         if not self.rfq_line_ids.filtered(lambda rfq: rfq.recommended):
             raise exceptions.UserError("At least one RFQ must be recommended before recommendation.")
         self.write({'status': 'recommendation'})
+        
+        
+    # Approver Actions
+    
+    def action_approve(self):
+        """ Approve RFP """
+        self.write({'status': 'approved'})
+
+    def action_reject(self):
+        """ Reject RFP """
+        self.write({'status': 'rejected'})
+
+    def action_close(self):
+        """ Close RFP """
+        self.write({'status': 'closed'})
+
+    def action_accept(self):
+        """ Accept RFP and create PO from Approved RFQ """
+        if not self.approved_supplier_id:
+            raise exceptions.UserError("No approved supplier selected.")
+
+        # Create PO
+        self.env['purchase.order'].create({
+            'partner_id': self.approved_supplier_id.id,
+            'rfp_id': self.id,
+            'order_line': [(0, 0, {
+                'product_id': line.product_id.id,
+                'name': line.description,
+                'product_qty': line.quantity,
+                'price_unit': line.unit_price,
+                'date_planned': fields.Date.today(),
+            }) for line in self.rfq_line_ids]
+        })
+        self.write({'status': 'accepted'})

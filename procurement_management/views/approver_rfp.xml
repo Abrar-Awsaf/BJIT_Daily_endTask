@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+
+        <!-- Approver RFP List View (Only Submitted RFPs) -->
+        <record id="view_rfp_list_approver" model="ir.ui.view">
+            <field name="name">rfp.list.approver</field>
+            <field name="model">rfp.management</field>
+            <field name="arch" type="xml">
+                <tree string="Approver RFPs">
+                    <field name="rfp_number" />
+                    <field name="status" />
+                    <field name="expiry_date" />
+                    <field name="total_amount" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Approver RFP Form View -->
+        <record id="view_rfp_form_approver" model="ir.ui.view">
+            <field name="name">rfp.form.approver</field>
+            <field name="model">rfp.management</field>
+            <field name="arch" type="xml">
+                <form string="Approver RFP View">
+                    <header>
+                        <button name="action_approve" string="Approve" type="object"
+                            class="oe_highlight"
+                            modifiers="{'invisible': [('status', '!=', 'submitted')]}" />
+                        <button name="action_reject" string="Reject" type="object"
+                            class="oe_highlight"
+                            modifiers="{'invisible': [('status', '!=', 'submitted')]}" />
+                        <button name="action_close" string="Close" type="object"
+                            class="oe_highlight"
+                            modifiers="{'invisible': [('status', '!=', 'approved')]}" />
+                        <button name="action_accept" string="Accept" type="object"
+                            class="oe_highlight"
+                            modifiers="{'invisible': [('status', '!=', 'recommendation')]}" />
+                        <field name="status" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="rfp_number" readonly="1" />
+                            <field name="status" readonly="1" />
+                            <field name="expiry_date" readonly="1" />
+                            <field name="total_amount" readonly="1" />
+                        </group>
+                        <notebook>
+                            <page string="Product Lines">
+                                <field name="product_line_ids" readonly="1" />
+                            </page>
+                            <page string="RFQ Lines">
+                                <field name="rfq_line_ids" readonly="1" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Approver RFP Action (Moved to the Top) -->
+        <record id="action_rfp_list_approver" model="ir.actions.act_window">
+            <field name="name">Approver RFPs</field>
+            <field name="res_model">rfp.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[['status', '=', 'submitted']]</field>
+            <field name="view_ids"
+                eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_rfp_list_approver')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_rfp_form_approver')})]" />
+        </record>
+
+        <!-- Approver RFP Menu -->
+        <menuitem id="menu_rfp_root" name="RFP Management" sequence="10" />
+        <menuitem id="menu_rfp_approver" name="Approver RFPs" parent="menu_rfp_root"
+            action="action_rfp_list_approver" sequence="30"
+            groups="procurement_management.group_supplier_approver" />
+
+    </data>
+</odoo>
