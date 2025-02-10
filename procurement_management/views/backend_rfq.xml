@@ -1,0 +1,82 @@
+<odoo>
+
+    <!-- ✅ Explicitly Define Form View for RFP -->
+    <record id="rfq_inside_rfp_form_approver" model="ir.ui.view">
+        <field name="name">rfp.form.approver</field>
+        <field name="model">rfp.management</field>
+        <field name="priority" eval="10" />  <!-- ✅ Ensure Higher Priority -->
+        <field name="arch" type="xml">
+            <form string="Approver RFP View">
+                <header>
+                    <button name="action_approve" string="Approve" type="object"
+                        class="oe_highlight"
+                        modifiers="{'invisible': [('status', '!=', 'submitted')]}" />
+                    <button name="action_reject" string="Reject" type="object"
+                        class="oe_highlight"
+                        modifiers="{'invisible': [('status', '!=', 'submitted')]}" />
+                    <button name="action_close" string="Close" type="object"
+                        class="oe_highlight"
+                        modifiers="{'invisible': [('status', '!=', 'approved')]}" />
+                    <button name="action_accept" string="Accept" type="object"
+                        class="oe_highlight"
+                        modifiers="{'invisible': [('status', '!=', 'recommendation')]}" />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="rfp_number" readonly="1" />
+                        <field name="status" readonly="1" />
+                        <field name="expiry_date" readonly="1" />
+                        <field name="total_amount" readonly="1" />
+                    </group>
+                    <notebook>
+                        <page string="Product Lines">
+                            <field name="product_line_ids" readonly="1" />
+                        </page>
+                        <page string="RFQ Lines">
+                            <field name="rfq_line_ids" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ✅ Tree View for RFPs -->
+    <record id="rfq_tree_view" model="ir.ui.view">
+        <field name="name">rfq.tree</field>
+        <field name="model">rfp.management</field>
+        <field name="arch" type="xml">
+            <tree string="RFPs with RFQs">
+                <field name="rfp_number" />
+                <field name="status" />
+                <field name="total_amount" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- ✅ Main Action to Show RFPs in Tree and Form View -->
+    <record id="my_rfp_with_rfq_action" model="ir.actions.act_window">
+        <field name="name">RFPs with RFQs</field>
+        <field name="res_model">rfp.management</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('rfq_tree_view')}), (0, 0, {'view_mode': 'form', 'view_id': ref('rfq_inside_rfp_form_approver')})]" />
+        <field name="domain">[('rfq_line_ids', '!=', False)]</field>
+    </record>
+
+    <!-- ✅ Ensure Clicking Tree Items Opens the Correct Form -->
+    <record id="rfq_form_action" model="ir.actions.act_window">
+        <field name="name">RFP Form</field>
+        <field name="res_model">rfp.management</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="rfq_inside_rfp_form_approver" />  <!-- ✅ Explicitly Set Form View -->
+    </record>
+
+    <!-- ✅ Ensure Menu Displays the Correct Action -->
+    <menuitem id="menu_rfqs" name="My RFQs"
+        parent="menu_rfp_root"
+        sequence="30"
+        action="my_rfp_with_rfq_action" />
+
+</odoo>

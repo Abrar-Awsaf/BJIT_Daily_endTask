@@ -4,3 +4,5 @@ access_my_supplier_manager,access_my_supplier_manager,model_res_partner,base.gro
 access_rfp_product_line_reviewer,Reviewer Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_reviewer,1,1,1,0
 access_rfp_product_line_approver,Approver Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_approver,1,1,0,0
 access_rfp_product_line_admin,Administrator Access to RFP Product Line,model_rfp_product_line,base.group_system,1,1,1,1
+
+access_rfp_admin,Administrator Access to RFP,model_rfp_management,base.group_system,1,1,1,1

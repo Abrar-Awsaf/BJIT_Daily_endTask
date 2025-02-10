@@ -47,8 +47,11 @@
                             <page string="Product Lines">
                                 <field name="product_line_ids" readonly="1" />
                             </page>
-                            <page string="RFQ Lines">
-                                <field name="rfq_line_ids" readonly="1" />
+                            <page string="test RFQ Lines">
+                                <group>
+                                    <field name="selected_rfq_id" string="Select RFQ for PO" />
+                                </group>
+                                <field name="recommended_rfq_line_ids" />
                             </page>
                         </notebook>
                     </sheet>
@@ -61,7 +64,7 @@
             <field name="name">Approver RFPs</field>
             <field name="res_model">rfp.management</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[['status', '=', 'submitted']]</field>
+            <field name="domain">[('status', '!=', 'draft')]</field>
             <field name="view_ids"
                 eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_rfp_list_approver')}),

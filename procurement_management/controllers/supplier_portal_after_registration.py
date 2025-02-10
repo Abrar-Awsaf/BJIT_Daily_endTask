@@ -59,22 +59,29 @@ class RFQPortal(CustomerPortal):
         # Create RFQ linked to the RFP
         rfq_vals = {
             'rfp_id': rfp.id,
-            'partner_id': supplier.id,
+            'partner_id': request.env.user.partner_id.id,
+            'company_id': rfp.create_uid.company_id.id,
             'expected_delivery_date': post.get('expected_delivery_date'),
             # 'terms_conditions': post.get('terms_conditions'),
             'warranty_period': int(post.get('warranty_period', 0)),
             'state': 'draft',
             'order_line': []
         }
+        print("///////////////////////")
+        print("RFQ Created for RFP:", rfp.id)
+        print("Vendor (partner_id):", request.env.user.partner_id.id)
+        print("Company (Buyer):", rfp.create_uid.company_id.id)
+        print("///////////////////////")
+
         
         # ✅ Populate RFQ Product Lines from RFP
         for line in rfp.product_line_ids:
             rfq_vals['order_line'].append((0, 0, {
                 'product_id': line.product_id.id,
-                'name': line.description,
+                'name': line.description if line.description else line.product_id.name,
                 'product_qty': line.quantity,
                 'price_unit': float(post.get(f'unit_price_{line.product_id.id}', 0)),  # ✅ Ensure Correct ID Reference
-    'delivery_charges_supplier': float(post.get(f'delivery_charges_{line.product_id.id}', 0)),  # ✅ Ensure Correct ID Reference
+                'delivery_charges_supplier': float(post.get(f'delivery_charges_{line.product_id.id}', 0)),  # ✅ Ensure Correct ID Reference
             }))
 
         new_rfq = request.env['purchase.order'].sudo().create(rfq_vals)
@@ -110,7 +117,8 @@ class RFQPortal(CustomerPortal):
         """
         supplier = request.env.user.partner_id
         rfq_list = request.env['purchase.order'].sudo().search([
-            ('partner_id', '=', supplier.id)
+            ('partner_id', '=', supplier.id),
+            ('state', 'in', ['draft', 'approved', 'rejected'])
         ])
         
         return request.render('procurement_management.rfq_list_template', {

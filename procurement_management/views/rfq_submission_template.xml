@@ -14,6 +14,7 @@
                         <thead>
                             <tr>
                                 <th>Product</th>
+                                <th>Image</th>
                                 <th>Quantity</th>
                                 <th>Unit Price (Editable)</th>
                                 <th>Delivery Charges (Editable)</th>
@@ -29,6 +30,19 @@
                                             t-att-value="line.product_id.name"
                                             readonly="true" />
                                     </td>
+
+                                    <td>
+                                        <t t-if="line.product_image">
+                                            <img
+                                                t-att-src="'data:image/png;base64,' + (line.product_image.decode('utf-8') if line.product_image else '')"
+                                                class="img-thumbnail" width="50" height="50" />
+                                        </t>
+                                        <t t-else="">
+                                            <img src="/web/static/src/img/placeholder.png"
+                                                class="img-thumbnail" width="50" height="50" />
+                                        </t>
+                                    </td>
+
 
                                     <!-- Quantity (Auto-filled & Read-Only) -->
                                     <td>

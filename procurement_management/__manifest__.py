@@ -30,10 +30,12 @@ Long description of module's purpose
         'views/supplier_registration.xml',
         'views/supplier_purchase_view.xml',
         'views/supplier_purchase_after_reviewed_view.xml',
+        # 'views/backend_rfq.xml',
         'views/reviewer_rfp.xml',
         'views/approver_rfp.xml',
         'views/rfp_list_template.xml',
         'views/rfq_submission_template.xml',
+        'views/submitted_rfq_portal_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

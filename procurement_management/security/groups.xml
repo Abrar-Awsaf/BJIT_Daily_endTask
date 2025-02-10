@@ -10,4 +10,5 @@
         <field name="category_id" ref="base.module_category_tools" />
 
     </record>
+
 </odoo>

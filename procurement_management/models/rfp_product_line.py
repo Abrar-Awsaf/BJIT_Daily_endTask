@@ -11,6 +11,8 @@ class RFPProductLine(models.Model):
     unit_price = fields.Monetary(string='Unit Price', required=False, readonly=True)
     subtotal_price = fields.Monetary(string='Subtotal', compute='_compute_subtotal', store=True)
     
+    product_image = fields.Binary(string="Product Image", related="product_id.image_1920", store=True, readonly=True)
+    
     # Fix: Rename supplier_delivery_charges to avoid label conflict
     delivery_charges_supplier = fields.Monetary(string='Supplier Delivery Charges', required=False)
     
