@@ -22,7 +22,7 @@ class RFP(models.Model):
     ], string='Status', default='draft', tracking=True,)
     
     # RFP Expiry Date: After this date, suppliers cannot submit RFQs
-    expiry_date = fields.Date(string='Expiry Date', required=True, default=lambda self: fields.Date.today() + timedelta(days=7))
+    expiry_date = fields.Date(string='Expiry Date', default=lambda self: fields.Date.today() + timedelta(days=7))
     
     # Total Amount: Computed from accepted RFQ lines
     total_amount = fields.Monetary(string='Total Amount', compute='_compute_total_amount', store=True)

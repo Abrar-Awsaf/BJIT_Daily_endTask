@@ -74,7 +74,7 @@
         <!-- Approver RFP Menu -->
         <menuitem id="menu_rfp_root" name="RFP Management" sequence="10" />
         <menuitem id="menu_rfp_approver" name="Approver RFPs" parent="menu_rfp_root"
-            action="action_rfp_list_approver" sequence="30"
+            action="action_rfp_list_approver"
             groups="procurement_management.group_supplier_approver" />
 
     </data>
