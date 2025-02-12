@@ -1,87 +1,6 @@
 <odoo>
     <data>
-        <template id="supplier_registration_template">
-            <t t-call="portal.portal_layout">
-                <div class="container mt-5">
-                    <h2 class="text-center text-primary">Supplier Registration</h2>
 
-                    <!-- Error Message Display -->
-                    <t t-if="error_message">
-                        <div class="alert alert-danger">
-                            <t t-esc="error_message" />
-                        </div>
-                    </t>
-
-                    <div class="card p-4 shadow-sm">
-                        <form action="/my/supplier/register/submit" method="POST">
-                            <input type="hidden" name="csrf_token"
-                                t-att-value="request.csrf_token()" />
-                            <input type="hidden" name="supplier_email" t-att-value="supplier_email" />
-
-                            <!-- Section 1: Company Information -->
-                            <h4>Company Information</h4>
-                            <div class="mb-3">
-                                <label>Company Name *</label>
-                                <input type="text" name="company_name" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label>Company Address *</label>
-                                <input type="text" name="company_address" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label>Company Type</label>
-                                <select name="company_type" class="form-control">
-                                    <option value="LLC">LLC</option>
-                                    <option value="Corporation">Corporation</option>
-                                </select>
-                            </div>
-
-                            <!-- Section 2: Financial Information -->
-                            <h4>Financial Information</h4>
-                            <div class="mb-3">
-                                <label>Bank Name *</label>
-                                <input type="text" name="bank_name" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label>Bank Account Number *</label>
-                                <input type="text" name="bank_account" class="form-control" />
-                            </div>
-
-                            <!-- Section 5: Declaration -->
-                            <h4>Declaration</h4>
-                            <p>
-                                "I confirm that all information and documents supplied are true and
-                                accurate to the
-                                best of my knowledge."
-                            </p>
-                            <div class="mb-3">
-                                <label>Name of Signatory *</label>
-                                <input type="text" name="signatory_name" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label>Authorized Signatory *</label>
-                                <input type="text" name="signatory_role" class="form-control" />
-                            </div>
-
-                            <button type="submit" class="btn btn-success w-100">Submit Registration</button>
-                        </form>
-                    </div>
-                </div>
-            </t>
-        </template>
-
-        <!-- Success Page -->
-        <template id="supplier_registration_success">
-            <t t-call="portal.portal_layout">
-                <div class="container mt-5">
-                    <div class="alert alert-success text-center">
-                        <t t-esc="success_message" />
-                    </div>
-                </div>
-            </t>
-        </template>
-
-        <!-- bhai er code -->
         <template id="new_supplier_registration_form_view_portal">
             <t t-call="portal.portal_layout">
                 <div class="container" id="new_supplier_registration"
@@ -108,232 +27,293 @@
                         <div class="form-step" id="step-1">
                             <h3 style="text-align: center;">Section 1: Company Information</h3>
                             <div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="company_name">Company Name</label>
-                                            <input type="text" class="form-control"
-                                                id="company_name"
-                                                name="company_name"
-                                                placeholder="Enter company name"
-                                                style="background-color: #ccffcc;" />
-                                            <small id="company_name_error_msg" class="text-danger"
-                                                style="display: none;">
-                                                Company Name cannot be empty.
-                                            </small>
-                                        </div>
+                                <div class="row o_row">
+                                    <div class="card shadow-lg border-0 rounded-4 p-4">
+                                        <div class="row">
+                                            <!-- First Column: Company Information -->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="company_name"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Name
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="company_name"
+                                                        name="company_name"
+                                                        placeholder="Enter company name"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="company_name_error_msg">
+                                                        Company Name cannot be empty.
+                                                    </small>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <label for="email">Company Email</label>
-                                            <input type="text" class="form-control" id="email"
-                                                name="email"
-                                                placeholder="Enter company email"
-                                                style="background-color: #ccffcc;" />
-                                            <small id="company_name_error" class="text-danger"
-                                                style="display: none;">
-                                                Company Name cannot be empty.
-                                            </small>
-                                        </div>
+                                                <div class="mb-3">
+                                                    <label for="email"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Email
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Enter company email"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="email_error_msg"
+                                                    >
+                                                        Company Email cannot be empty.
+                                                    </small>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <label for="company_type_category">Company Type (LLC,
-                                                Corporation, etc.)
-                                            </label>
-                                            <select class="form-control" id="company_type_category"
-                                                name="company_type_category" required="true"
-                                                style="background-color: #ccffcc;">
-                                                <option value="LLC">LLC</option>
-                                                <option value="corporate">Corporation</option>
-                                                <option value="sole_proprietorship">Sole
-                                                    Proprietorship</option>
-                                                <option value="partnership">Partnership</option>
-                                                <option value="cooperative">Cooperative</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="company_registered_address">Company
-                                                Registered Address</label>
-                                            <input type="text" class="form-control"
-                                                id="company_registered_address"
-                                                name="company_registered_address"
-                                                placeholder="Enter registered address"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="company_alternate_address">Company Alternate
-                                                Address</label>
-                                            <input type="text" class="form-control"
-                                                id="company_alternate_address"
-                                                name="company_alternate_address"
-                                                placeholder="Enter alternate address"
-                                                style="background-color: #ccffcc;" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone">Company Phone</label>
-                                            <input type="text" class="form-control" id="phone"
-                                                name="phone"
-                                                placeholder="Enter company phone"
-                                                style="background-color: #ccffcc;" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="trade_license_number">Trade License Number</label>
-                                            <input type="text" class="form-control"
-                                                id="trade_license_number"
-                                                name="trade_license_number"
-                                                placeholder="Enter trade license number"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                            <small id="trade_license_error_msg"
-                                                class="text-danger"
-                                                style="display: none;">
-                                                Must need to be alphanumeric between 8–20characters.
-                                            </small>
+                                                <div class="mb-3">
+                                                    <label for="company_type_category"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Type
+                                                    </label>
+                                                    <select
+                                                        class="form-select rounded-2 shadow-sm border-primary"
+                                                        id="company_type_category"
+                                                        name="company_type_category" required="true"
+                                                        style="background-color: #ccffcc;">
+                                                        <option value="LLC">LLC</option>
+                                                        <option value="corporate">Corporation</option>
+                                                        <option value="sole_proprietorship">Sole
+                                                            Proprietorship</option>
+                                                        <option value="partnership">Partnership</option>
+                                                        <option value="cooperative">Cooperative</option>
+                                                    </select>
+                                                </div>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tax_identification_number">Tax
-                                                Identification Number (TIN)
-                                            </label>
-                                            <input type="text" class="form-control"
-                                                id="tax_identification_number"
-                                                name="tax_identification_number"
-                                                placeholder="Enter TIN"
-                                                style="background-color: #ccffcc;" />
-                                            <small id="tin_error_msg"
-                                                class="text-danger"
-                                                style="display: none;">
-                                                Must need to have 16-digits.
-                                            </small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="commencement_date">Commencement Date</label>
-                                            <input type="date" class="form-control"
-                                                id="commencement_date"
-                                                name="commencement_date"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                            <small id="commencement_date_error_msg"
-                                                style="color: red; display: none;">
-                                                The commencement date cannot be today or a future
-                                                date.
-                                            </small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="expiry_date">Expiry Date</label>
-                                            <input type="date" class="form-control" id="expiry_date"
-                                                name="expiry_date"
-                                                style="background-color: #ccffcc;" />
-                                            <small id="expiry_date_error_msg"
-                                                style="color: red; display: none;">
-                                                The expiry date must be a future date.
-                                            </small>
-                                        </div>
+                                                <div class="mb-3">
+                                                    <label for="trade_license_number"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Trade License Number
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="trade_license_number"
+                                                        name="trade_license_number"
+                                                        placeholder="Enter trade license number"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="trade_license_error_msg"
+                                                    >
+                                                        Must be alphanumeric and between 8–20
+                                                        characters.
+                                                    </small>
+                                                </div>
 
+                                                <div class="mb-3">
+                                                    <label for="tax_identification_number"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Tax Identification Number (TIN)
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="tax_identification_number"
+                                                        name="tax_identification_number"
+                                                        placeholder="Enter TIN"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="tin_error_msg"
+                                                    >
+                                                        Must be a 16-digit number.
+                                                    </small>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="commencement_date"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Commencement Date
+                                                    </label>
+                                                    <input type="date"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="commencement_date"
+                                                        name="commencement_date"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="commencement_date_error_msg"
+                                                    >
+                                                        The commencement date cannot be today or a
+                                                        future date.
+                                                    </small>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="expiry_date"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Expiry Date
+                                                    </label>
+                                                    <input type="date"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="expiry_date"
+                                                        name="expiry_date"
+                                                        style="background-color: #ccffcc;" />
+                                                    <small id="expiry_date_error_msg"
+                                                    >
+                                                        The expiry date must be a future date.
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <!-- Second Column: Contract Information -->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label
+                                                        class="form-label text-dark fw-bold fs-5 text-uppercase">
+                                                        Contract Information
+                                                    </label>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="phone"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Phone
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="phone"
+                                                        name="phone"
+                                                        placeholder="Enter company phone"
+                                                        style="background-color: #ccffcc;" />
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="company_registered_address"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Registered Address
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="company_registered_address"
+                                                        name="company_registered_address"
+                                                        placeholder="Enter registered address"
+                                                        style="background-color: #ccffcc;" />
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="company_alternate_address"
+                                                        class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                        Company Alternate Address
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control rounded-2 shadow-sm border-primary"
+                                                        id="company_alternate_address"
+                                                        name="company_alternate_address"
+                                                        placeholder="Enter alternate address"
+                                                        style="background-color: #ccffcc;" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
                                         <!-- Contact Person Information -->
                                         <p></p>
                                         <h4>Contact Person Information</h4>
-                                        <div class="form-group">
-                                            <label for="contact_person_title">Contact Person’s Title</label>
-                                            <input type="text" class="form-control"
-                                                id="contact_person_title"
-                                                name="contact_person_title"
-                                                placeholder="Enter contact person's title"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contact_email">Contact Email</label>
-                                            <input type="email" class="form-control"
-                                                id="contact_email"
-                                                name="contact_email"
-                                                placeholder="Enter contact email"
-                                                style="background-color: #ccffcc;" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="contact_phone">Contact Phone</label>
-                                            <input type="tel" class="form-control"
-                                                id="contact_phone"
-                                                name="contact_phone"
-                                                placeholder="Enter contact phone number"
-                                                style="background-color: #ccffcc;" />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="contact_person_title">Contact Person’s
+                                                    Title</label>
+                                                <input type="text" class="form-control"
+                                                    id="contact_person_title"
+                                                    name="contact_person_title"
+                                                    placeholder="Enter contact person's title"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="contact_email">Contact Email</label>
+                                                <input type="email" class="form-control"
+                                                    id="contact_email"
+                                                    name="contact_email"
+                                                    placeholder="Enter contact email"
+                                                    style="background-color: #ccffcc;" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="contact_phone">Contact Phone</label>
+                                                <input type="tel" class="form-control"
+                                                    id="contact_phone"
+                                                    name="contact_phone"
+                                                    placeholder="Enter contact phone number"
+                                                    style="background-color: #ccffcc;" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
                                         <!-- Finance Department Information -->
                                         <p></p>
                                         <h4>Finance Department Information</h4>
-                                        <div class="form-group">
-                                            <label for="finance_contact_title">Contact Person’s
-                                                Title</label>
-                                            <input type="text" class="form-control"
-                                                id="finance_contact_title"
-                                                name="finance_contact_title"
-                                                placeholder="Enter finance contact person's title"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="finance_contact_email">Contact Email</label>
-                                            <input type="email" class="form-control"
-                                                id="finance_contact_email"
-                                                name="finance_contact_email"
-                                                placeholder="Enter finance contact email"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="finance_contact_phone">Contact Phone</label>
-                                            <input type="tel" class="form-control"
-                                                id="finance_contact_phone"
-                                                name="finance_contact_phone"
-                                                placeholder="Enter finance contact phone number"
-                                                style="background-color: #ccffcc;"
-                                            />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="finance_contact_title">Contact Person’s
+                                                    Title</label>
+                                                <input type="text" class="form-control"
+                                                    id="finance_contact_title"
+                                                    name="finance_contact_title"
+                                                    placeholder="Enter finance contact person's title"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="finance_contact_email">Contact Email</label>
+                                                <input type="email" class="form-control"
+                                                    id="finance_contact_email"
+                                                    name="finance_contact_email"
+                                                    placeholder="Enter finance contact email"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="finance_contact_phone">Contact Phone</label>
+                                                <input type="tel" class="form-control"
+                                                    id="finance_contact_phone"
+                                                    name="finance_contact_phone"
+                                                    placeholder="Enter finance contact phone number"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
                                         <!-- Authorized Person Information -->
                                         <p></p>
                                         <h4>Authorized Person Information</h4>
-                                        <div class="form-group">
-                                            <label for="authorized_person_name">Name of Authorized
-                                                Person</label>
-                                            <input type="text" class="form-control"
-                                                id="authorized_person_name"
-                                                name="authorized_person_name"
-                                                placeholder="Enter authorized person name"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="authorized_person_email">Contact Email</label>
-                                            <input type="email" class="form-control"
-                                                id="authorized_person_email"
-                                                name="authorized_person_email"
-                                                placeholder="Enter authorized person’s email"
-                                                style="background-color: #ccffcc;"
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="authorized_person_phone">Contact Phone</label>
-                                            <input type="tel" class="form-control"
-                                                id="authorized_person_phone"
-                                                name="authorized_person_phone"
-                                                placeholder="Enter authorized person’s phone number"
-                                                style="background-color: #ccffcc;" />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="authorized_person_name">Name of
+                                                    Authorized
+                                                    Person</label>
+                                                <input type="text" class="form-control"
+                                                    id="authorized_person_name"
+                                                    name="authorized_person_name"
+                                                    placeholder="Enter authorized person name"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="authorized_person_email">Contact Email</label>
+                                                <input type="email" class="form-control"
+                                                    id="authorized_person_email"
+                                                    name="authorized_person_email"
+                                                    placeholder="Enter authorized person’s email"
+                                                    style="background-color: #ccffcc;"
+                                                />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="authorized_person_phone">Contact Phone</label>
+                                                <input type="tel" class="form-control"
+                                                    id="authorized_person_phone"
+                                                    name="authorized_person_phone"
+                                                    placeholder="Enter authorized person’s phone number"
+                                                    style="background-color: #ccffcc;" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-primary" id="next-1">Next</button>
+                            <button type="button" class="btn btn-primary rounded-pill shadow-s"
+                                id="next-1">Next</button>
                         </div>
 
                         <!-- Step 2: Financial Information -->
@@ -512,6 +492,78 @@
                                             style="background-color: #ccffcc;" />
                                     </div>
 
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Client 4 Fields -->
+                                    <h4>Client 4</h4>
+                                    <div class="form-group">
+                                        <label for="client_4_name">Client Name</label>
+                                        <input type="text" class="form-control" id="client_4_name"
+                                            name="client_4_name"
+                                            placeholder="Enter client name"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client_4_address">Client Address</label>
+                                        <input type="text" class="form-control"
+                                            id="client_4_address"
+                                            name="client_4_address"
+                                            placeholder="Enter client address"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="client_4_contact_email">Client Contact Email</label>
+                                        <input type="email" class="form-control"
+                                            id="client_4_contact_email"
+                                            name="client_4_contact_email"
+                                            placeholder="Enter contact email"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client_4_contact_phone">Client Contact Phone</label>
+                                        <input type="tel" class="form-control"
+                                            id="client_4_contact_phone"
+                                            name="client_4_contact_phone"
+                                            placeholder="Enter contact phone"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Client 5 Fields -->
+                                    <h4>Client 5</h4>
+                                    <div class="form-group">
+                                        <label for="client_5_name">Client Name</label>
+                                        <input type="text" class="form-control" id="client_5_name"
+                                            name="client_5_name"
+                                            placeholder="Enter client name"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client_5_address">Client Address</label>
+                                        <input type="text" class="form-control"
+                                            id="client_5_address"
+                                            name="client_5_address"
+                                            placeholder="Enter client address"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="client_5_contact_email">Client Contact Email</label>
+                                        <input type="email" class="form-control"
+                                            id="client_5_contact_email"
+                                            name="client_5_contact_email"
+                                            placeholder="Enter contact email"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client_5_contact_phone">Client Contact Phone</label>
+                                        <input type="tel" class="form-control"
+                                            id="client_5_contact_phone"
+                                            name="client_5_contact_phone"
+                                            placeholder="Enter contact phone"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
                                 </div>
 
                             </div>

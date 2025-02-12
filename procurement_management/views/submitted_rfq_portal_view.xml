@@ -1,7 +1,7 @@
 <odoo>
     <data>
         <!-- Portal Entry for RFPs in Portal Menu -->
-        <template id="portal_rfq_list" inherit_id="portal.portal_my_home">
+        <!-- <template id="portal_rfq_list" inherit_id="portal.portal_my_home">
             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
                     <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
@@ -64,6 +64,6 @@
                     </table>
                 </div>
             </t>
-        </template>
+        </template> -->
     </data>
 </odoo>

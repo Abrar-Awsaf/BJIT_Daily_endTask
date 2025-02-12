@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <!-- Portal Entry for Supplier OTP Verification -->
+        <template id="portal_supplier_home_otp" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[@id='portal_vendor_category']" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
+                    <t t-set="title">Supplier OTP Confirmation</t>
+                    <t t-set="text">Secure Email Verification with OTP</t>
+                    <t t-set="url" t-value="'/my/supplier'" />
+                    <t t-set="config_card" t-value="True" />
+                </t>
+            </xpath>
+        </template>
+
+        <!-- Supplier OTP Verification Page -->
+        <template id="supplier_otp_verification_template">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-5 d-flex justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-sm-12">
+                        <div class="card shadow-lg rounded-lg p-4 border-0">
+                            <div class="text-center mb-4">
+                                <h1 class="text-uppercase text-primary fw-bold">OTP Verification</h1>
+                                <p class="text-muted">Enter your registered email to receive an OTP</p>
+                            </div>
+
+                            <!-- Error Message Display -->
+                            <t t-if="error_message">
+                                <div class="alert alert-danger d-flex align-items-center">
+                                    <i class="fa fa-exclamation-circle me-2"></i>
+                                    <t t-esc="error_message" />
+                                </div>
+                            </t>
+
+                            <!-- Success Message Display -->
+                            <t t-if="success_message">
+                                <div class="alert alert-success d-flex align-items-center">
+                                    <i class="fa fa-check-circle me-2"></i>
+                                    <t t-esc="success_message" />
+                                </div>
+                            </t>
+
+                            <div class="bg-light p-4 rounded">
+                                <!-- Form to Submit Email -->
+                                <t t-if="not display_otp_section">
+                                    <form method="POST" action="/my/supplier/request"
+                                        id="otpRequestForm">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Supplier Email</label>
+                                            <input type="email" name="supplier_email"
+                                                class="form-control rounded-pill px-3 py-2"
+                                                placeholder="Enter your email" />
+                                        </div>
+                                        <button type="submit"
+                                            class="btn btn-primary w-100 rounded-pill">
+                                            <i class="fa fa-paper-plane me-1"></i> Send OTP </button>
+                                        <div id="loadingIndicator"
+                                            class="text-center mt-2 text-primary"
+                                            style="display: none;">
+                                            <i class="fa fa-spinner fa-spin"></i> Sending OTP... </div>
+                                    </form>
+                                </t>
+
+                                <!-- OTP Verification Section -->
+                                <t t-if="display_otp_section">
+                                    <form method="POST" action="/my/supplier/validate" class="mt-4">
+                                        <input type="hidden" name="csrf_token"
+                                            t-att-value="request.csrf_token()" />
+                                        <input type="hidden" name="supplier_email"
+                                            t-att-value="supplier_email" />
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Enter OTP</label>
+                                            <input type="text" name="entered_otp"
+                                                class="form-control rounded-pill px-3 py-2"
+                                                placeholder="Enter OTP" />
+                                        </div>
+                                        <button type="submit"
+                                            class="btn btn-success w-100 rounded-pill mt-2">
+                                            <i class="fa fa-check"></i> Verify OTP </button>
+
+                                        <!-- Change Email Button -->
+                                        <a href="/my/supplier"
+                                            class="btn btn-outline-secondary w-100 rounded-pill mt-3">
+                                            <i class="fa fa-arrow-left"></i> Change Email </a>
+
+                                    </form>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple JS for Loading Indicator -->
+                <script>
+                    document.getElementById('otpRequestForm')?.addEventListener('submit', function()
+                    {
+                    document.getElementById('loadingIndicator').style.display = 'block';
+                    });
+                </script>
+
+                <!-- Include FontAwesome for Icons -->
+                <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

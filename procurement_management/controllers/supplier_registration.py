@@ -33,12 +33,12 @@ class SupplierRegistrationPortal(CustomerPortal):
             for key in keys:
                 if kw.get(key):
                     vals[key] = kw.get(key)
-            if kw.get('tax_identification_number') and (len(kw.get('tax_identification_number')) != 15 or not kw.get(
+            if kw.get('tax_identification_number') and (len(kw.get('tax_identification_number')) != 16 or not kw.get(
                     'tax_identification_number').isdigit()):
-                error_list.append("Tax Identification Number Should Be Of 15 Digits And All Digits")
-            if kw.get('trade_license_number') and (len(kw.get('trade_license_number')) != 15 or not kw.get(
+                error_list.append("Tax Identification Number Should Be Of 16 Digits And All Digits")
+            if kw.get('trade_license_number') and (len(kw.get('trade_license_number')) < 8 or len(kw.get('tax_identification_number')) > 20 or not kw.get(
                     'trade_license_number').isdigit()):
-                error_list.append("Trade License Number Should Be Of 15 Digits And All Digits")
+                error_list.append("Trade License Number Should Be between 8 to 20 Digits And All Digits")
             if kw.get('expiry_date') and fields.Date.to_date(kw.get('expiry_date')) <= fields.date.today():
                 error_list.append("Expiry Date Should Be Greater Than Today")
             if not kw.get('company_name'):
