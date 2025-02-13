@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class SupplierRegistration(models.TransientModel):
@@ -72,27 +74,27 @@ class SupplierRegistration(models.TransientModel):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('submitted', 'Submitted'),
-        ('reviewed', 'Reviewed'),
-        ('approved', 'Approved'),
+        ('approved1', 'Approved'),
+        ('approved', 'Approved by Approver'),
         ('rejected', 'Rejected'),
-        ('final_rejected', 'Final Rejected'),
+        ('final_rejected', 'Rejected by Approver'),
         ('blacklisted', 'Blacklisted')
     ], string='State', default='draft')
     
     reject_reason = fields.Char(string="Rejection/Blacklist Reason")
     
-    def action_review(self):
+    def action_approved1(self):
         if not self.env.user.has_group('procurement_management.group_supplier_reviewer'):
-            raise UserError("Only users with Reviewer role can review the supplier.")
-        self.state = 'reviewed'
+            raise UserError("Only users with Reviewer role can approved the supplier.")
+        self.state = 'approved1'
 
     def action_approve(self):
         
         if not self.env.user.has_group('procurement_management.group_supplier_approver'):
             raise UserError("Only users with Approver role can approve the supplier.")
         
-        if self.state != 'reviewed':
-            raise UserError("Only reviewed vendors can be approved.")
+        if self.state != 'approved1':
+            raise UserError("Only approved vendors can be final approved.")
     
         vals = {
             'name': self.company_name or 'N/A',
@@ -180,15 +182,15 @@ class SupplierRegistration(models.TransientModel):
         for field in file_fields:
             if getattr(self, field):
                 vals[field] = getattr(self, field)
-        new_supplier = self.env['res.partner'].create(vals)
-        new_user = self.env['res.users'].create({
+        new_supplier = self.env['res.partner'].sudo().create(vals)
+        new_user = self.env['res.users'].sudo().create({
             'login': self.email,
             'password': self.email,
             'partner_id': new_supplier.id,
             'company_id': self.env.company.id,
             'groups_id': [(6, 0, self.env.ref('base.group_portal').ids)]
         })
-        self.env.ref('procurement_management.vendor_registration_confirmation').send_mail(new_supplier.id)
+        self.env.ref('procurement_management.vendor_registration_confirmation').send_mail(new_supplier.id, force_send=True)
         self.state = 'approved'
 
     def action_reject(self):
@@ -216,6 +218,15 @@ class SupplierRegistration(models.TransientModel):
     def action_final_reject(self):
         if not self.env.user.has_group('procurement_management.group_supplier_approver'):
             raise UserError("Only users with Approver role can finalize rejection.")
-        if self.state != 'reviewed':
+        if self.state != 'approved1':
             raise UserError("Only reviewed suppliers can be finally rejected.")
         self.state = 'final_rejected'
+        
+    # Function to get all reviewers' email addresses
+    def get_reviewers_emails(self):
+        reviewer_users = self.env['res.users'].search([
+            ('groups_id', 'in', self.env.ref('procurement_management.group_supplier_reviewer').id)
+        ])
+        emails = [user.email for user in reviewer_users if user.email]
+        _logger.info("Reviewer Emails: %s", emails)  # Debugging log
+        return ','.join(emails)  # Convert list to a string

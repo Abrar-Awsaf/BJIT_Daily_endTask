@@ -12,7 +12,7 @@
                             class="oe_highlight"
                             invisible="[['state', '!=', 'draft']]" />
 
-                        <button name="action_review" string="Review" type="object"
+                        <button name="action_approved1" string="Approved1" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_reviewer"
                             condition="state == 'submitted'" />
@@ -25,12 +25,12 @@
                         <button name="action_approve" string="Approve" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_approver"
-                            condition="state == 'reviewed'" />
+                            condition="state == 'approved1'" />
 
                         <button name="action_final_reject" string="Final Reject" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_approver"
-                            condition="state == 'reviewed'" />
+                            condition="state == 'approved1'" />
 
                         <field name="state" widget="statusbar" />
                     </header>
@@ -111,7 +111,7 @@
         <field name="name">Reviewed Vendors</field>
         <field name="res_model">supplier.registration</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="domain">[('state', '=', 'reviewed')]</field>
+        <field name="domain">[('state', '=', 'approved1')]</field>
     </record>
 
     <menuitem id="menu_reviewed_vendors" name="Reviewed Vendors"

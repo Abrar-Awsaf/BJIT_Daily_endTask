@@ -1,8 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_supplier_registration,access_supplier_registration,model_supplier_registration,base.group_user,1,1,1,1
 access_my_supplier_user,access_my_supplier,model_res_partner,,1,0,0,0
 access_my_supplier_manager,access_my_supplier_manager,model_res_partner,base.group_system,1,1,1,1
-access_supplier_registration_reviewer,supplier.registration reviewer,model_supplier_registration,procurement_management.group_supplier_reviewer,1,1,0,0
+
+access_supplier_registration_reviewer,supplier.registration reviewer,model_supplier_registration,procurement_management.group_supplier_reviewer,1,1,0,1
 access_supplier_registration_approver,supplier.registration approver,model_supplier_registration,procurement_management.group_supplier_approver,1,1,0,0
 
 access_rfp_reviewer,Reviewer Access to RFP,model_rfp_management,procurement_management.group_supplier_reviewer,1,1,1,0

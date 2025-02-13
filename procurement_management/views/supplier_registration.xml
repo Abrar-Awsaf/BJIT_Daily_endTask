@@ -25,7 +25,18 @@
 
                         <!-- Step 1: Company Information -->
                         <div class="form-step" id="step-1">
-                            <h3 style="text-align: center;">Section 1: Company Information</h3>
+                            <h3
+                                style="text-align: center; 
+                                    font-weight: bold; 
+                                    font-size: 1.75rem; 
+                                    color: #2c3e50; 
+                                    text-transform: uppercase; 
+                                    letter-spacing: 1px; 
+                                    padding: 10px 0; 
+                                    border-bottom: 3px solid #3498db; 
+                                    display: inline-block;">
+                                Section 1: Company Information
+                            </h3>
                             <div>
                                 <div class="row o_row">
                                     <div class="card shadow-lg border-0 rounded-4 p-4">
@@ -156,9 +167,15 @@
                                             <!-- Second Column: Contract Information -->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label
-                                                        class="form-label text-dark fw-bold fs-5 text-uppercase">
-                                                        Contract Information
+                                                    <label class="form-label fw-bold text-uppercase"
+                                                        style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">
+                                                        Company's Contract Information
                                                     </label>
                                                 </div>
 
@@ -205,536 +222,956 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-4">
-                                    <div class="col-md-12">
-                                        <!-- Contact Person Information -->
-                                        <p></p>
-                                        <h4>Contact Person Information</h4>
+                                <div class="row o_row mt-3">
+                                    <div class="card shadow-lg border-0 rounded-4 p-4">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="contact_person_title">Contact Person’s
-                                                    Title</label>
-                                                <input type="text" class="form-control"
-                                                    id="contact_person_title"
-                                                    name="contact_person_title"
-                                                    placeholder="Enter contact person's title"
-                                                    style="background-color: #ccffcc;"
-                                                />
+                                            <div class="col-md-12 mt-3">
+                                                <!-- Contact Person Information -->
+                                                <h4 class="fw-bold text-uppercase"
+                                                    style="font-size: 1.5rem; 
+                                                        color: #2c3e50; 
+                                                        letter-spacing: 0.5px; 
+                                                        padding: 8px 0; 
+                                                        border-bottom: 2px solid #3498db; 
+                                                        display: inline-block;">
+                                                    Contact Person Information
+                                                </h4>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label for="contact_person_title"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Person’s Title
+                                                        </label>
+                                                        <input type="text"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="contact_person_title"
+                                                            name="contact_person_title"
+                                                            placeholder="Enter contact person's title"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="contact_email"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Email
+                                                        </label>
+                                                        <input type="email"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="contact_email" name="contact_email"
+                                                            placeholder="Enter contact email"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="contact_phone"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Phone
+                                                        </label>
+                                                        <input type="tel"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="contact_phone" name="contact_phone"
+                                                            placeholder="Enter contact phone number"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="contact_email">Contact Email</label>
-                                                <input type="email" class="form-control"
-                                                    id="contact_email"
-                                                    name="contact_email"
-                                                    placeholder="Enter contact email"
-                                                    style="background-color: #ccffcc;" />
+
+                                            <div class="col-md-12 mt-3">
+                                                <!-- Finance Department Information -->
+                                                <h4 class="fw-bold text-uppercase"
+                                                    style="font-size: 1.5rem; 
+                                                        color: #2c3e50; 
+                                                        letter-spacing: 0.5px; 
+                                                        padding: 8px 0; 
+                                                        border-bottom: 2px solid #3498db; 
+                                                        display: inline-block;">Finance
+                                                    Department Information</h4>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label for="finance_contact_title"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Person’s Title
+                                                        </label>
+                                                        <input type="text"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="finance_contact_title"
+                                                            name="finance_contact_title"
+                                                            placeholder="Enter finance contact person's title"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="finance_contact_email"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Email
+                                                        </label>
+                                                        <input type="email"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="finance_contact_email"
+                                                            name="finance_contact_email"
+                                                            placeholder="Enter finance contact email"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="finance_contact_phone"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Phone
+                                                        </label>
+                                                        <input type="tel"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="finance_contact_phone"
+                                                            name="finance_contact_phone"
+                                                            placeholder="Enter finance contact phone number"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="contact_phone">Contact Phone</label>
-                                                <input type="tel" class="form-control"
-                                                    id="contact_phone"
-                                                    name="contact_phone"
-                                                    placeholder="Enter contact phone number"
-                                                    style="background-color: #ccffcc;" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <!-- Finance Department Information -->
-                                        <p></p>
-                                        <h4>Finance Department Information</h4>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="finance_contact_title">Contact Person’s
-                                                    Title</label>
-                                                <input type="text" class="form-control"
-                                                    id="finance_contact_title"
-                                                    name="finance_contact_title"
-                                                    placeholder="Enter finance contact person's title"
-                                                    style="background-color: #ccffcc;"
-                                                />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="finance_contact_email">Contact Email</label>
-                                                <input type="email" class="form-control"
-                                                    id="finance_contact_email"
-                                                    name="finance_contact_email"
-                                                    placeholder="Enter finance contact email"
-                                                    style="background-color: #ccffcc;"
-                                                />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="finance_contact_phone">Contact Phone</label>
-                                                <input type="tel" class="form-control"
-                                                    id="finance_contact_phone"
-                                                    name="finance_contact_phone"
-                                                    placeholder="Enter finance contact phone number"
-                                                    style="background-color: #ccffcc;"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <!-- Authorized Person Information -->
-                                        <p></p>
-                                        <h4>Authorized Person Information</h4>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="authorized_person_name">Name of
-                                                    Authorized
-                                                    Person</label>
-                                                <input type="text" class="form-control"
-                                                    id="authorized_person_name"
-                                                    name="authorized_person_name"
-                                                    placeholder="Enter authorized person name"
-                                                    style="background-color: #ccffcc;"
-                                                />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="authorized_person_email">Contact Email</label>
-                                                <input type="email" class="form-control"
-                                                    id="authorized_person_email"
-                                                    name="authorized_person_email"
-                                                    placeholder="Enter authorized person’s email"
-                                                    style="background-color: #ccffcc;"
-                                                />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="authorized_person_phone">Contact Phone</label>
-                                                <input type="tel" class="form-control"
-                                                    id="authorized_person_phone"
-                                                    name="authorized_person_phone"
-                                                    placeholder="Enter authorized person’s phone number"
-                                                    style="background-color: #ccffcc;" />
+
+                                            <div class="col-md-12 mt-3">
+                                                <!-- Authorized Person Information -->
+                                                <h4 class="fw-bold text-uppercase"
+                                                    style="font-size: 1.5rem; 
+                                                        color: #2c3e50; 
+                                                        letter-spacing: 0.5px; 
+                                                        padding: 8px 0; 
+                                                        border-bottom: 2px solid #3498db; 
+                                                        display: inline-block;">Authorized
+                                                    Person Information</h4>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label for="authorized_person_name"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Name of Authorized Person
+                                                        </label>
+                                                        <input type="text"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="authorized_person_name"
+                                                            name="authorized_person_name"
+                                                            placeholder="Enter authorized person name"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="authorized_person_email"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Email
+                                                        </label>
+                                                        <input type="email"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="authorized_person_email"
+                                                            name="authorized_person_email"
+                                                            placeholder="Enter authorized person’s email"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="authorized_person_phone"
+                                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                            Contact Phone
+                                                        </label>
+                                                        <input type="tel"
+                                                            class="form-control rounded-2 shadow-sm border-primary"
+                                                            id="authorized_person_phone"
+                                                            name="authorized_person_phone"
+                                                            placeholder="Enter authorized person’s phone number"
+                                                            style="background-color: #ccffcc;" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                            <button type="button" class="btn btn-primary rounded-pill shadow-s"
-                                id="next-1">Next</button>
+                            <div style="text-align: right;">
+                                <button type="button"
+                                    class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                    id="next-1" style="border: 3px solid #0d6efd;">
+                                    Next
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Step 2: Financial Information -->
                         <div class="form-step" id="step-2" style="display:none;">
-                            <h3>Section 2: Financial Information</h3>
-                            <!-- Financial Information Fields (as already defined) -->
-                            <h4>Bank Account Information</h4>
-                            <div class="form-group">
-                                <label for="bank_name">Bank Name</label>
-                                <input type="text" class="form-control" id="bank_name"
-                                    name="bank_name"
-                                    placeholder="Enter bank name" style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="bank_address">Bank Address</label>
-                                <input type="text" class="form-control" id="bank_address"
-                                    name="bank_address"
-                                    placeholder="Enter bank address"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="bank_swift_code">Bank SWIFT Code</label>
-                                <input type="text" class="form-control" id="bank_swift_code"
-                                    name="bank_swift_code"
-                                    placeholder="Enter SWIFT code"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="account_name">Account Name</label>
-                                <input type="text" class="form-control" id="account_name"
-                                    name="account_name"
-                                    placeholder="Enter account name"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="account_number">Account Number</label>
-                                <input type="text" class="form-control" id="account_number"
-                                    name="account_number"
-                                    placeholder="Enter account number"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="iban">IBAN</label>
-                                <input type="text" class="form-control" id="iban" name="iban"
-                                    placeholder="Enter IBAN" style="background-color: #ccffcc;"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="company_address_as_per_bank">Company Address as per bank
-                                    records</label>
-                                <input type="text" class="form-control"
-                                    id="company_address_as_per_bank"
-                                    name="company_address_as_per_bank"
-                                    placeholder="Enter bank-recorded company address"
-                                    style="background-color: #ccffcc;" />
-                                <small id="company_registered_address_error_msg"
-                                    style="color: red; display: none;">
-                                    janina keno disi pore hoito change/delete korbo.
-                                </small>
-                            </div>
+                            <div class="card shadow-lg border-0 rounded-4 p-4">
+                                <h3
+                                    style="text-align: center; 
+                                    font-weight: bold; 
+                                    font-size: 1.75rem; 
+                                    color: #2c3e50; 
+                                    text-transform: uppercase; 
+                                    letter-spacing: 1px; 
+                                    padding: 10px 0; 
+                                    border-bottom: 3px solid #3498db; 
+                                    display: inline-block;">Section
+                                    2:
+                                    Financial Information</h3>
 
-                            <button type="button" class="btn btn-secondary" id="prev-2">Previous</button>
-                            <button type="button" class="btn btn-primary" id="next-2">Next</button>
+                                <!-- Financial Information Fields -->
+                                <h4 class="form-label fw-bold text-uppercase"
+                                    style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Bank
+                                    Account
+                                    Information</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="bank_name"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Bank Name
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="bank_name" name="bank_name"
+                                            placeholder="Enter bank name"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="bank_address"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Bank Address
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="bank_address" name="bank_address"
+                                            placeholder="Enter bank address"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="bank_swift_code"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Bank SWIFT Code
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="bank_swift_code" name="bank_swift_code"
+                                            placeholder="Enter SWIFT code"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="account_name"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Account Name
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="account_name" name="account_name"
+                                            placeholder="Enter account name"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="account_number"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Account Number
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="account_number" name="account_number"
+                                            placeholder="Enter account number"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="iban"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            IBAN
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="iban" name="iban"
+                                            placeholder="Enter IBAN"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="company_address_as_per_bank"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Company Address as per Bank Records
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="company_address_as_per_bank"
+                                            name="company_address_as_per_bank"
+                                            placeholder="Enter bank-recorded company address"
+                                            style="background-color: #ccffcc;" />
+                                        <small id="company_registered_address_error_msg"
+                                            class="text-danger d-none">
+                                            janina keno disi pore hoito change/delete korbo.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="prev-2" style="border: 3px solid #0d6efd;">
+                                        Previous
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="next-2" style="border: 3px solid #0d6efd;">Next</button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Step 3: Client References -->
                         <div class="form-step" id="step-3" style="display:none;">
+                            <div class="card shadow-lg border-0 rounded-4 p-4">
+                                <h3
+                                    style="text-align: center; 
+                                        font-weight: bold; 
+                                        font-size: 1.75rem; 
+                                        color: #2c3e50; 
+                                        text-transform: uppercase; 
+                                        letter-spacing: 1px; 
+                                        padding: 10px 0; 
+                                        border-bottom: 3px solid #3498db; 
+                                        display: inline-block;">
+                                    Section 3: Previous Client References
+                                </h3>
 
-                            <h3>Section 3: Previous Client References</h3>
-                            <div class="row col-md-12">
-                                <div class="col-md-4">
-                                    <!-- Client 1 Fields -->
-                                    <h4>Client 1</h4>
-                                    <div class="form-group">
-                                        <label for="client_1_name">Client Name</label>
-                                        <input type="text" class="form-control" id="client_1_name"
-                                            name="client_1_name"
-                                            placeholder="Enter client name"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_1_address">Client Address</label>
-                                        <input type="text" class="form-control"
-                                            id="client_1_address"
-                                            name="client_1_address"
-                                            placeholder="Enter client address"
-                                            style="background-color: #ccffcc;" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <!-- Client 1 Fields -->
+                                        <h4 class="form-label fw-bold text-uppercase"
+                                            style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Client
+                                            1</h4>
+                                        <div class="mb-3">
+                                            <label for="client_1_name"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Name
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_1_name" name="client_1_name"
+                                                placeholder="Enter client name"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_1_address"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Address
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_1_address" name="client_1_address"
+                                                placeholder="Enter client address"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_1_contact_email"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Email
+                                            </label>
+                                            <input type="email"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_1_contact_email"
+                                                name="client_1_contact_email"
+                                                placeholder="Enter contact email"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_1_contact_phone"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Phone
+                                            </label>
+                                            <input type="tel"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_1_contact_phone"
+                                                name="client_1_contact_phone"
+                                                placeholder="Enter contact phone"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="client_1_contact_email">Client Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            id="client_1_contact_email"
-                                            name="client_1_contact_email"
-                                            placeholder="Enter contact email"
-                                            style="background-color: #ccffcc;" />
+                                    <div class="col-md-4">
+                                        <!-- Client 2 Fields -->
+                                        <h4 class="form-label fw-bold text-uppercase"
+                                            style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Client
+                                            2</h4>
+                                        <div class="mb-3">
+                                            <label for="client_2_name"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Name
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_2_name" name="client_2_name"
+                                                placeholder="Enter client name"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_2_address"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Address
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_2_address" name="client_2_address"
+                                                placeholder="Enter client address"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_2_contact_email"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Email
+                                            </label>
+                                            <input type="email"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_2_contact_email"
+                                                name="client_2_contact_email"
+                                                placeholder="Enter contact email"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_2_contact_phone"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Phone
+                                            </label>
+                                            <input type="tel"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_2_contact_phone"
+                                                name="client_2_contact_phone"
+                                                placeholder="Enter contact phone"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="client_1_contact_phone">Client Contact Phone</label>
-                                        <input type="tel" class="form-control"
-                                            id="client_1_contact_phone"
-                                            name="client_1_contact_phone"
-                                            placeholder="Enter contact phone"
-                                            style="background-color: #ccffcc;" />
+
+                                    <div class="col-md-4">
+                                        <!-- Client 3 Fields -->
+                                        <h4 class="form-label fw-bold text-uppercase"
+                                            style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Client
+                                            3</h4>
+                                        <div class="mb-3">
+                                            <label for="client_3_name"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Name
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_3_name" name="client_3_name"
+                                                placeholder="Enter client name"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_3_address"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Address
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_3_address" name="client_3_address"
+                                                placeholder="Enter client address"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_3_contact_email"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Email
+                                            </label>
+                                            <input type="email"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_3_contact_email"
+                                                name="client_3_contact_email"
+                                                placeholder="Enter contact email"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_3_contact_phone"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Phone
+                                            </label>
+                                            <input type="tel"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_3_contact_phone"
+                                                name="client_3_contact_phone"
+                                                placeholder="Enter contact phone"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <!-- Client 4 Fields -->
+                                        <h4 class="form-label fw-bold text-uppercase"
+                                            style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Client
+                                            4</h4>
+                                        <div class="mb-3">
+                                            <label for="client_4_name"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Name
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_4_name" name="client_4_name"
+                                                placeholder="Enter client name"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_4_address"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Address
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_4_address" name="client_4_address"
+                                                placeholder="Enter client address"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_4_contact_email"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Email
+                                            </label>
+                                            <input type="email"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_4_contact_email"
+                                                name="client_4_contact_email"
+                                                placeholder="Enter contact email"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_4_contact_phone"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Phone
+                                            </label>
+                                            <input type="tel"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_4_contact_phone"
+                                                name="client_4_contact_phone"
+                                                placeholder="Enter contact phone"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <!-- Client 5 Fields -->
+                                        <h4 class="form-label fw-bold text-uppercase"
+                                            style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">Client
+                                            5</h4>
+                                        <div class="mb-3">
+                                            <label for="client_5_name"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Name
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_5_name" name="client_5_name"
+                                                placeholder="Enter client name"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_5_address"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Address
+                                            </label>
+                                            <input type="text"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_5_address" name="client_5_address"
+                                                placeholder="Enter client address"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_5_contact_email"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Email
+                                            </label>
+                                            <input type="email"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_5_contact_email"
+                                                name="client_5_contact_email"
+                                                placeholder="Enter contact email"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="client_5_contact_phone"
+                                                class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                                Client Contact Phone
+                                            </label>
+                                            <input type="tel"
+                                                class="form-control rounded-2 shadow-sm border-primary"
+                                                id="client_5_contact_phone"
+                                                name="client_5_contact_phone"
+                                                placeholder="Enter contact phone"
+                                                style="background-color: #ccffcc;" />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <!-- Client 2 Fields -->
-                                    <h4>Client 2</h4>
-                                    <div class="form-group">
-                                        <label for="client_2_name">Client Name</label>
-                                        <input type="text" class="form-control" id="client_2_name"
-                                            name="client_2_name"
-                                            placeholder="Enter client name"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_2_address">Client Address</label>
-                                        <input type="text" class="form-control"
-                                            id="client_2_address"
-                                            name="client_2_address"
-                                            placeholder="Enter client address"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="client_2_contact_email">Client Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            id="client_2_contact_email"
-                                            name="client_2_contact_email"
-                                            placeholder="Enter contact email"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_2_contact_phone">Client Contact Phone</label>
-                                        <input type="tel" class="form-control"
-                                            id="client_2_contact_phone"
-                                            name="client_2_contact_phone"
-                                            placeholder="Enter contact phone"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
+                                <!-- Navigation Buttons -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="prev-3" style="border: 3px solid #0d6efd;">
+                                        Previous
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="next-3" style="border: 3px solid #0d6efd;">Next</button>
                                 </div>
-                                <div class="col-md-4">
-                                    <!-- Client 3 Fields -->
-                                    <h4>Client 3</h4>
-                                    <div class="form-group">
-                                        <label for="client_3_name">Client Name</label>
-                                        <input type="text" class="form-control" id="client_3_name"
-                                            name="client_3_name"
-                                            placeholder="Enter client name"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_3_address">Client Address</label>
-                                        <input type="text" class="form-control"
-                                            id="client_3_address"
-                                            name="client_3_address"
-                                            placeholder="Enter client address"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="client_3_contact_email">Client Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            id="client_3_contact_email"
-                                            name="client_3_contact_email"
-                                            placeholder="Enter contact email"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_3_contact_phone">Client Contact Phone</label>
-                                        <input type="tel" class="form-control"
-                                            id="client_3_contact_phone"
-                                            name="client_3_contact_phone"
-                                            placeholder="Enter contact phone"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <!-- Client 4 Fields -->
-                                    <h4>Client 4</h4>
-                                    <div class="form-group">
-                                        <label for="client_4_name">Client Name</label>
-                                        <input type="text" class="form-control" id="client_4_name"
-                                            name="client_4_name"
-                                            placeholder="Enter client name"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_4_address">Client Address</label>
-                                        <input type="text" class="form-control"
-                                            id="client_4_address"
-                                            name="client_4_address"
-                                            placeholder="Enter client address"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="client_4_contact_email">Client Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            id="client_4_contact_email"
-                                            name="client_4_contact_email"
-                                            placeholder="Enter contact email"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_4_contact_phone">Client Contact Phone</label>
-                                        <input type="tel" class="form-control"
-                                            id="client_4_contact_phone"
-                                            name="client_4_contact_phone"
-                                            placeholder="Enter contact phone"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <!-- Client 5 Fields -->
-                                    <h4>Client 5</h4>
-                                    <div class="form-group">
-                                        <label for="client_5_name">Client Name</label>
-                                        <input type="text" class="form-control" id="client_5_name"
-                                            name="client_5_name"
-                                            placeholder="Enter client name"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_5_address">Client Address</label>
-                                        <input type="text" class="form-control"
-                                            id="client_5_address"
-                                            name="client_5_address"
-                                            placeholder="Enter client address"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="client_5_contact_email">Client Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            id="client_5_contact_email"
-                                            name="client_5_contact_email"
-                                            placeholder="Enter contact email"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="client_5_contact_phone">Client Contact Phone</label>
-                                        <input type="tel" class="form-control"
-                                            id="client_5_contact_phone"
-                                            name="client_5_contact_phone"
-                                            placeholder="Enter contact phone"
-                                            style="background-color: #ccffcc;" />
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <!-- Navigation buttons -->
-                            <button type="button" class="btn btn-secondary" id="prev-3">Previous</button>
-                            <button type="button" class="btn btn-primary" id="next-3">Next</button>
                         </div>
-
 
                         <!-- Step 4: Certifications or Accreditations -->
                         <div class="form-step" id="step-4" style="display:none;">
-                            <h3>Section 4: Certifications or Accreditations</h3>
+                            <div class="card shadow-lg border-0 rounded-4 p-4">
+                                <h3
+                                    style="text-align: center; 
+                font-weight: bold; 
+                font-size: 1.75rem; 
+                color: #2c3e50; 
+                text-transform: uppercase; 
+                letter-spacing: 1px; 
+                padding: 10px 0; 
+                border-bottom: 3px solid #3498db; 
+                display: inline-block;">
+                                    Section 4: Certifications or Accreditations
+                                </h3>
 
-                            <!-- Certification Fields -->
-                            <h4>Certification</h4>
+                                <!-- Certification Fields -->
+                                <h4 class="form-label fw-bold text-uppercase"
+                                    style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">
+                                    Certification</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="certification"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Certification
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certification" name="certification"
+                                            placeholder="Enter certification name"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="certificate_number"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Certificate Number
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certificate_number" name="certificate_number"
+                                            placeholder="Enter certificate number"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="certification">Certification</label>
-                                <input type="text" class="form-control" id="certification"
-                                    name="certification"
-                                    placeholder="Enter certification name"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="certificate_number">Certificate Number</label>
-                                <input type="text" class="form-control" id="certificate_number"
-                                    name="certificate_number" placeholder="Enter certificate number"
-                                    style="background-color: #ccffcc;"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="certifying_body">Certifying Body</label>
-                                <input type="text" class="form-control" id="certifying_body"
-                                    name="certifying_body"
-                                    placeholder="Enter certifying body"
-                                    style="background-color: #ccffcc;" />
-                            </div>
-                            <div class="form-group">
-                                <label for="award_date">Award Date</label>
-                                <input type="date" class="form-control" id="award_date"
-                                    name="award_date"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="certificate_expiry_date">Expiry Date</label>
-                                <input type="date" class="form-control" id="certificate_expiry_date"
-                                    name="certificate_expiry_date"
-                                    style="background-color: #ccffcc;"
-                                />
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="certifying_body"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Certifying Body
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certifying_body" name="certifying_body"
+                                            placeholder="Enter certifying body"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="award_date"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Award Date
+                                        </label>
+                                        <input type="date"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="award_date" name="award_date" />
+                                    </div>
+                                </div>
 
-                            <!-- Navigation buttons -->
-                            <button type="button" class="btn btn-secondary" id="prev-4">Previous</button>
-                            <button type="button" class="btn btn-primary" id="next-4">Next</button>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="certificate_expiry_date"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Expiry Date
+                                        </label>
+                                        <input type="date"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certificate_expiry_date"
+                                            name="certificate_expiry_date"
+                                            style="background-color: #ccffcc;" />
+                                    </div>
+                                </div>
+
+                                <!-- Navigation Buttons -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="prev-4" style="border: 3px solid #0d6efd;">Previous</button>
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="next-4" style="border: 3px solid #0d6efd;">Next</button>
+                                </div>
+                            </div>
                         </div>
 
+                        <!-- Step 5: Document Submission -->
                         <div class="form-step" id="step-5" style="display:none;">
-                            <h3>Section 5: Document Submission</h3>
+                            <div class="card shadow-lg border-0 rounded-4 p-4">
+                                <h3
+                                    style="text-align: center; 
+                                        font-weight: bold; 
+                                        font-size: 1.75rem; 
+                                        color: #2c3e50; 
+                                        text-transform: uppercase; 
+                                        letter-spacing: 1px; 
+                                        padding: 10px 0; 
+                                        border-bottom: 3px solid #3498db; 
+                                        display: inline-block;">
+                                    Section 5: Document Submission
+                                </h3>
 
-                            <!-- Document Checklist -->
-                            <h4>Checklist</h4>
-                            <div class="form-group">
-                                <label for="trade_license_business_registration">Trade License /
-                                    Business Registration
-                                </label>
-                                <input type="file" class="form-control"
-                                    id="trade_license_business_registration"
-                                    name="trade_license_business_registration" />
-                            </div>
-                            <div class="form-group">
-                                <label for="certificate_of_incorporation">Certificate of
-                                    Incorporation</label>
-                                <input type="file" class="form-control"
-                                    id="certificate_of_incorporation"
-                                    name="certificate_of_incorporation" />
-                            </div>
+                                <!-- Document Checklist -->
+                                <h4 class="form-label fw-bold text-uppercase"
+                                    style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">
+                                    Checklist</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="trade_license_business_registration"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Trade License / Business Registration
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="trade_license_business_registration"
+                                            name="trade_license_business_registration" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="certificate_of_incorporation"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Certificate of Incorporation
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certificate_of_incorporation"
+                                            name="certificate_of_incorporation" />
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="certificate_of_good_standing"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Certificate of Good Standing
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="certificate_of_good_standing"
+                                            name="certificate_of_good_standing" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="establishment_card"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Establishment Card
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="establishment_card" name="establishment_card" />
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="certificate_of_good_standing">Certificate of Good
-                                    Standing</label>
-                                <input type="file" class="form-control"
-                                    id="certificate_of_good_standing"
-                                    name="certificate_of_good_standing" />
-                            </div>
-                            <div class="form-group">
-                                <label for="establishment_card">Establishment Card</label>
-                                <input type="file" class="form-control" id="establishment_card"
-                                    name="establishment_card" />
-                            </div>
-                            <div class="form-group">
-                                <label for="vat_tax_certificate">VAT / Tax Certificate</label>
-                                <input type="file" class="form-control" id="vat_tax_certificate"
-                                    name="vat_tax_certificate" />
-                            </div>
-                            <div class="form-group">
-                                <label for="memorandum_of_association">Memorandum of Association /
-                                    Power of Attorney /
-                                    Legal Instrument authorizing Authorized Person
-                                </label>
-                                <input type="file" class="form-control"
-                                    id="memorandum_of_association"
-                                    name="memorandum_of_association" />
-                            </div>
-                            <div class="form-group">
-                                <label for="identification_document_for_authorized_person">Identification
-                                    Document for
-                                    Authorized Person / Signatory
-                                </label>
-                                <input type="file" class="form-control"
-                                    id="identification_document_for_authorized_person"
-                                    name="identification_document_for_authorized_person" />
-                            </div>
-                            <div class="form-group">
-                                <label for="bank_letter_indicating_bank_account">Bank Letter
-                                    indicating Bank Account
-                                    Information
-                                </label>
-                                <input type="file" class="form-control"
-                                    id="bank_letter_indicating_bank_account"
-                                    name="bank_letter_indicating_bank_account" />
-                            </div>
-                            <div class="form-group">
-                                <label for="past_2_years_audited_financial_statements">Past 2 years
-                                    Audited Financial
-                                    Statements
-                                </label>
-                                <input type="file" class="form-control"
-                                    id="past_2_years_audited_financial_statements"
-                                    name="past_2_years_audited_financial_statements" />
-                            </div>
-                            <div class="form-group">
-                                <label for="other_certifications">Other Certification /
-                                    Accreditations</label>
-                                <input type="file" class="form-control" id="other_certifications"
-                                    name="other_certifications" />
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="vat_tax_certificate"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            VAT / Tax Certificate
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="vat_tax_certificate" name="vat_tax_certificate" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="memorandum_of_association"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Memorandum of Association / Power of Attorney / Legal
+                                            Instrument
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="memorandum_of_association"
+                                            name="memorandum_of_association" />
+                                    </div>
+                                </div>
 
-                            <!-- Declaration -->
-                            <h4>Declaration</h4>
-                            <div class="form-group">
-                                <label for="signatory_name">Name of Signatory</label>
-                                <input type="text" class="form-control" id="signatory_name"
-                                    name="signatory_name"
-                                    placeholder="Enter signatory name" />
-                            </div>
-                            <div class="form-group">
-                                <label for="authorized_signatory">Authorized Signatory</label>
-                                <input type="text" class="form-control" id="authorized_signatory"
-                                    name="authorized_signatory"
-                                    placeholder="Enter authorized signatory"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="company_stamp_and_date">Company Stamp &amp; Date (Image
-                                    Upload)</label>
-                                <input type="file" class="form-control" id="company_stamp_and_date"
-                                    name="company_stamp_and_date"
-                                    accept="image/*" />
-                                <small class="form-text text-muted">Please upload an image of the
-                                    company stamp with the
-                                    date.
-                                </small>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="identification_document_for_authorized_person"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Identification Document for Authorized Person /
+                                            Signatory
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="identification_document_for_authorized_person"
+                                            name="identification_document_for_authorized_person" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="bank_letter_indicating_bank_account"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Bank Letter Indicating Bank Account Information
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="bank_letter_indicating_bank_account"
+                                            name="bank_letter_indicating_bank_account" />
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="past_2_years_audited_financial_statements"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Past 2 Years Audited Financial Statements
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="past_2_years_audited_financial_statements"
+                                            name="past_2_years_audited_financial_statements" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="other_certifications"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Other Certifications / Accreditations
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="other_certifications" name="other_certifications" />
+                                    </div>
+                                </div>
 
-                            <!-- Navigation buttons -->
-                            <button type="button" class="btn btn-secondary" id="prev-5">Previous</button>
-                            <button type="submit" class="btn btn-primary" id="submit-form">Submit</button>
+                                <!-- Declaration -->
+                                <h4 class="form-label fw-bold text-uppercase mt-3"
+                                    style="font-size: 1.25rem; 
+                                                                color: #2c3e50; 
+                                                                letter-spacing: 0.5px; 
+                                                                display: block; 
+                                                                padding: 5px 0; 
+                                                                border-left: 4px solid #3498db; 
+                                                                padding-left: 10px;">
+                                    Declaration</h4>
+                                <p class="mt-1 mb-0" style="font-size: 1rem; color: #333;">
+                                    Before submitting your documents, please read and confirm the
+                                    following statement:
+                                </p>
+                                <div class="d-flex align-items-start mt-3">
+                                    <input type="checkbox" id="declaration-checkbox"
+                                        name="declaration-checkbox" class="mt-1" required="ture" />
+                                    <label for="declaration-checkbox" class="ms-2"
+                                        style="font-size: 1rem; color: #333;">
+                                        "I confirm that all information and documents supplied are
+                                        true and accurate to the best of my
+                                        knowledge, and I understand that this information may be
+                                        considered material in the evaluation of
+                                        quotations, bids, and/or proposals."
+                                    </label>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="signatory_name"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Name of Signatory
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="signatory_name" name="signatory_name"
+                                            placeholder="Enter signatory name" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="authorized_signatory"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Authorized Signatory
+                                        </label>
+                                        <input type="text"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="authorized_signatory" name="authorized_signatory"
+                                            placeholder="Enter authorized signatory" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="company_stamp_and_date"
+                                            class="form-label text-primary fw-bold fs-6 text-uppercase mb-1">
+                                            Company Stamp &amp; Date (Image Upload)
+                                        </label>
+                                        <input type="file"
+                                            class="form-control rounded-2 shadow-sm border-primary"
+                                            id="company_stamp_and_date"
+                                            name="company_stamp_and_date"
+                                            accept="image/*" />
+                                        <small class="form-text text-muted">
+                                            Please upload an image of the company stamp with the
+                                            date.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Navigation Buttons -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button"
+                                        class="btn btn-primary rounded-pill shadow-s mt-3 px-4 py-2"
+                                        id="prev-5" style="border: 3px solid #0d6efd;">Previous</button>
+                                    <button type="submit"
+                                        class="btn btn-primary shadow-s mt-3 px-4 py-2 fw-bold"
+                                        style="background-color: #f4c430; 
+                                                color: white; 
+                                                border: 2px solid #001f3f;"
+                                        id="submit-form">Submit</button>
+                                </div>
+                            </div>
                         </div>
+
 
                     </form>
                 </div>

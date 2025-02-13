@@ -3,16 +3,15 @@
 
     <record id="rfq_submission_notification" model="mail.template">
         <field name="name">RFQ Submission Notification</field>
-        <field name="model_id" ref="model_purchase_order" />  <!-- ✅ FIXED -->
+        <field name="model_id" ref="model_purchase_order" />
         <field name="subject">New RFQ Submitted for Your RFP</field>
         <field name="email_from">no-reply@yourcompany.com</field>
-        <field name="email_to">${object.rfp_id.create_uid.email}</field>  <!-- ✅ FIXED -->
+        <field name="email_to">${object.rfp_id.create_uid.email}</field>
         <field name="body_html" type="html">
-            <p>Dear <span t-field="object.rfp_id.create_uid.name"></span>,</p>  <!-- ✅ FIXED -->
+            <p>Dear <span t-field="object.rfp_id.create_uid.name"></span>,</p>
             <p>A new RFQ has been submitted for your RFP: <strong>
                     <span t-field="object.rfp_id.rfp_number"></span>
-                </strong>. <!--
-                ✅ FIXED -->
+                </strong>
             </p>
             <p>Please log in to review the quotation.</p>
         </field>
@@ -43,5 +42,19 @@
             <p>Thank you for registering with us. We look forward to working with you!</p>
 
         </field>
+    </record>
+    <!-- email_template for reviewers after a supplier submits a registration form -->
+    <record id="email_supplier_registration_notification" model="mail.template">
+        <field name="name">Supplier Registration Notification</field>
+        <field name="model_id" ref="model_supplier_registration" />
+        <field name="email_from">abrar.awsaf@bjitacademy.com</field>
+        <field name="subject">New Supplier Registration - ${object.company_name}</field>
+        <field name="body_html"><![CDATA[
+        <p>Hello,</p>
+        <p>A new supplier, <strong><t t-out="ctx.get('company_name')"/></strong>, has been registered and requires your review.</p>
+        <p>Company Email: </p><h2 style="color: #3498db;"><t t-out="ctx.get('email')"/></h2>
+        <p>Company Phone: </p><h2 style="color: #3498db;"><t t-out="ctx.get('phone')"/></h2>
+        <p>Best regards,<br/>Procurement Team</p>
+    ]]></field>
     </record>
 </odoo>

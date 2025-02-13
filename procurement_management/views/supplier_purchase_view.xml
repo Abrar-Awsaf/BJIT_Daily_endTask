@@ -9,9 +9,10 @@
                     <header>
                         <button name="action_submit" string="Submit" type="object"
                             class="oe_highlight"
-                            invisible="state not in ('draft')" />
+                            groups="procurement_management.group_supplier_reviewer"
+                            invisible="state not in ('draft', 'approved1')" />
 
-                        <button name="action_review" string="Review" type="object"
+                        <button name="action_approved1" string="Approve" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_reviewer"
                             invisible="state not in ('submitted')" />
@@ -26,15 +27,15 @@
                             groups="procurement_management.group_supplier_reviewer"
                             invisible="state not in ('submitted')" />
 
-                        <button name="action_approve" string="Approve" type="object"
+                        <button name="action_approve" string="Approve by Approver" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_approver"
-                            invisible="state not in ('reviewed')" />
+                            invisible="state in ('approved', 'rejected', 'blacklisted', 'final_rejected')" />
 
-                        <button name="action_final_reject" string="Final Reject" type="object"
+                        <button name="action_final_reject" string="Reject by Approver" type="object"
                             class="oe_highlight"
                             groups="procurement_management.group_supplier_approver"
-                            invisible="state not in ('reviewed')" />
+                            invisible="state in ('approved', 'rejected', 'blacklisted', 'final_rejected')" />
 
                         <field name="state" widget="statusbar" />
                     </header>
@@ -211,7 +212,7 @@
                 </group>
                 <filter string="Waiting for approval" name="submitted"
                     domain="[('state','=','submitted')]" />
-                <filter string="Reviewed" name="reviewed" domain="[('state','=','reviewed')]" />
+                <filter string="Reviewed" name="reviewed" domain="[('state','=','approved1')]" />
                 <filter string="Approved" name="approved" domain="[('state','=','approved')]" />
                 <filter string="Rejected" name="rejected" domain="[('state','=','rejected')]" />
                 <filter string="Final Rejected" name="final_rejected"
@@ -247,29 +248,29 @@
                             <span class="badge badge-warning"
                                 t-if="record.state.raw_value == 'submitted'">Submitted</span>
                             <span class="badge badge-info"
-                                t-if="record.state.raw_value == 'reviewed'">Reviewed</span>
+                                t-if="record.state.raw_value == 'approved1'">Reviewed</span>
                             <span class="badge badge-success"
                                 t-if="record.state.raw_value == 'approved'">Approved</span>
                             <span class="badge badge-danger"
                                 t-if="record.state.raw_value == 'rejected'">Rejected</span>
 
                             <div class="o_kanban_footer mt-2">
-                                <button type="object" name="action_review"
+                                <button type="object" name="action_approved1"
                                     class="btn btn-sm btn-outline-info"
                                     role="button"
                                     t-if="record.state.raw_value == 'submitted'">
-                                    Review
+                                    Approve1
                                 </button>
                                 <button type="object" name="action_approve"
                                     class="btn btn-sm btn-outline-success"
                                     role="button"
-                                    t-if="record.state.raw_value == 'reviewed'">
+                                    t-if="record.state.raw_value == 'approved1'">
                                     Approve
                                 </button>
                                 <button type="object" name="action_reject"
                                     class="btn btn-sm btn-outline-danger"
                                     role="button"
-                                    t-if="record.state.raw_value == 'submitted' or record.state.raw_value == 'reviewed'">
+                                    t-if="record.state.raw_value == 'submitted' or record.state.raw_value == 'approved1'">
                                     Reject
                                 </button>
                             </div>

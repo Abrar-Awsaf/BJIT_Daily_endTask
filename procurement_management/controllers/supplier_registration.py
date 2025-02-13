@@ -4,6 +4,8 @@ from odoo import http, _
 from odoo.http import request, route
 from odoo import fields
 from collections import OrderedDict
+import logging
+_logger = logging.getLogger(__name__)
 
 class SupplierRegistrationPortal(CustomerPortal):
 
@@ -63,6 +65,43 @@ class SupplierRegistrationPortal(CustomerPortal):
             vals['state'] = 'submitted'
             if not error_list:
                 new_supplier = request.env['supplier.registration'].sudo().create(vals)
+                # Send email notification to reviewers
+                email_template = request.env.ref('procurement_management.email_supplier_registration_notification')
+                if email_template:
+                    try:
+                        reviewer_emails = new_supplier.get_reviewers_emails()
+                        if not reviewer_emails:
+                            _logger.warning("No reviewer emails found. Email not sent.")
+                        else:
+                            _logger.info("Sending email to: %s", reviewer_emails)
+
+                            # Email values (recipient and sender)
+                            email_values = {
+                                'email_to': reviewer_emails,
+                                'email_from': 'abrar.awsaf@bjitacademy.com',
+                            }
+
+                            # Context for the template
+                            ctx = {
+                                'default_model': 'supplier.registration',  # Must match your model!
+                                'default_res_id': new_supplier.id,  # Ensures the object is passed
+                                'default_email_to': reviewer_emails,
+                                'default_template_id': email_template.id,
+                                'company_name': new_supplier.company_name,  # Pass supplier name
+                                'email': new_supplier.email,  # Pass supplier email
+                                'phone': new_supplier.phone,  # Pass supplier phone
+                                'force_send': True,
+                            }
+
+                            # Send email with context and email_values
+                            email_template.with_context(**ctx).sudo().send_mail(
+                                new_supplier.id, email_values=email_values, force_send=True
+                            )
+
+                            _logger.info("Email successfully sent to: %s", reviewer_emails)
+
+                    except Exception as e:
+                        _logger.error("Error sending email: %s", str(e))
                 if new_supplier:
                     success_list.append("Supplier Registered Successfully")
                 if file_vals:
@@ -72,42 +111,3 @@ class SupplierRegistrationPortal(CustomerPortal):
                               {'page_name': 'supplier_registration',
                                'error_list': error_list,
                                'success_list': success_list})
-
-    # @http.route(['/my/supplier', '/my/supplier/page/<int:page>'], type='http', auth='user', website=True)
-    # def get_supplier_list(self, page=1, sortby=None, search="", search_in='name', **kw):
-    #     searchbar_sortings = {
-    #         'date': {'label': _('Newest'), 'order': 'create_date desc'},
-    #         'name': {'label': _('Name'), 'order': 'name'},
-    #         'expiry_date': {'label': _('Expiry Date'), 'order': 'expiry_date desc'},
-    #     }
-    #     domain = [('supplier_rank', '>=', 1)]
-    #     search_list = {
-    #         # 'all': {'label': _('All'), 'domain': []},
-    #         'name': {'label': _('Name'), 'input': 'name', 'domain': [('name', 'ilike', search)]}
-    #     }
-    #     if not search_in:
-    #         search_in = 'name'
-    #     domain += search_list[search_in]['domain']
-    #     total_supplier_count = request.env['res.partner'].sudo().search_count(domain)
-
-    #     # default sort by value
-    #     if not sortby:
-    #         sortby = 'date'
-    #     order = searchbar_sortings[sortby]['order']
-    #     page_detail = portal_pager(url='/my/supplier',
-    #                                total=total_supplier_count,
-    #                                url_args={'sortby': sortby, 'search_in': search_in, 'search': search},
-    #                                page=page,
-    #                                step=3)
-    #     suppliers = request.env['res.partner'].sudo().search(domain, order=order,
-    #                                                          limit=3, offset=page_detail['offset'])
-
-    #     return request.render("procurement_management.supplier_list_view_portal", {'suppliers': suppliers,
-    #                                                                       'page_name': 'supplier_list',
-    #                                                                       'pager': page_detail,
-    #                                                                       'searchbar_sortings': searchbar_sortings,
-    #                                                                       'sortby': sortby,
-    #                                                                       'search_in': search_in,
-    #                                                                       'search': search,
-    #                                                                       'searchbar_inputs': search_list,
-    #                                                                       })
