@@ -1,5 +1,43 @@
 <template xml:space="preserve">
     <t t-name="procurement_management.rfp_dashboard_template" owl="1">
+        <style>
+            /* Style to allow scrolling in the dashboard container */
+            .dashboard-container {
+                max-height: 100vh;    /* Full viewport height */
+                overflow-y: auto;     /* Enable vertical scrolling */
+                padding-right: 15px;  /* Add padding for scrollbar */
+            }
+
+            /* Spacing and margin adjustments */
+            .chart-container {
+                margin-top: 20px;
+            }
+
+            .metric-card {
+                margin-bottom: 20px;
+            }
+
+            .metric-card h3 {
+                margin-bottom: 10px;
+            }
+
+            /* Ensure proper layout for the product list */
+            ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            ul li {
+                margin-bottom: 5px;
+            }
+
+            /* Adjust the table of key metrics */
+            .dashboard-metrics {
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+
         <section class="dashboard-container">
             <h1>📊 RFP Dashboard</h1>
 
@@ -25,16 +63,12 @@
                     <option value="last_year">Last Year</option>
                     <option value="custom_range">Custom Range</option>
                 </select>
-
-                <!-- Custom Date Picker (Only Visible if Custom Range is Selected) -->
                 <div t-if="state.selectedDateRange === 'custom_range'">
                     <label for="start_date">Start Date: </label>
                     <input type="date" id="start_date" t-model="state.startDate" t-on-change="onCustomDateChange"/>
-
                     <label for="end_date">End Date: </label>
                     <input type="date" id="end_date" t-model="state.endDate" t-on-change="onCustomDateChange"/>
                 </div>
-                
                 <p>Selected Date Range: <strong t-esc="state.selectedDateRange"/></p>
             </div>
 
@@ -48,19 +82,31 @@
                     <h3>💰 Total RFQ Amount</h3>
                     <p><strong t-esc="state.keyMetrics.totalAmount"/> USD</p>
                 </div>
-                <div class="metric-card">
-                    <h3>📦 Product-Wise Breakdown</h3>
-                    <ul>
-                        <t t-if="state.keyMetrics.products &amp;&amp; state.keyMetrics.products.length > 0">
-                            <t t-foreach="state.keyMetrics.products" t-as="product" t-key="product.name">
-                                <li><strong t-esc="product.name"/>: <span t-esc="product.quantity"/></li>
-                            </t>
+            </div>
+
+            <!-- Product-Wise Breakdown Section -->
+            <div class="chart-container">
+                <h3>📦 Product-Wise Breakdown</h3>
+                <ul>
+                    <t t-if="state.keyMetrics.products.length > 0">
+                        <t t-foreach="state.keyMetrics.products" t-as="product" t-key="product.name">
+                            <li><strong t-esc="product.name"/>: <span t-esc="product.quantity"/></li>
                         </t>
-                        <t t-else="">
-                            <p>No product data available for the selected period.</p>
-                        </t>
-                    </ul>
-                </div>
+                    </t>
+                    <t t-else="">
+                        <p>No product data available for the selected period.</p>
+                    </t>
+                </ul>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="chart-container">
+                <h3>📦 Product-Wise Breakdown</h3>
+                <canvas id="rfqBarChart"></canvas>
+                <h3>📊 RFQ Amount Distribution</h3>
+                <canvas id="rfqPieChart"></canvas>
+                <h3>📈 RFQ Trends Over Time</h3>
+                <canvas id="rfqLineChart"></canvas>
             </div>
         </section>
     </t>

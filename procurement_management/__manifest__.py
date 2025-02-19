@@ -46,7 +46,8 @@ Long description of module's purpose
     ],
     'assets': {
         'web.assets_backend': [
-            # 'https://cdn.jsdelivr.net/npm/chart.js',
+            'procurement_management/static/src/css/dashboard.css',
+            'https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js',
             'procurement_management/static/src/xml/rfp_dashboard_template.xml',
             'procurement_management/static/src/js/rfp_dashboard.js',
         ],
