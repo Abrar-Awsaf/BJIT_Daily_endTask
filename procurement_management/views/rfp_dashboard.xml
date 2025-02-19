@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+        <!-- ✅ Define the Dashboard Action -->
+        <record id="action_rfp_dashboard" model="ir.actions.client">
+            <field name="name">RFP Dashboard</field>
+            <field name="tag">rfp_dashboard</field>  <!-- ✅ Must match JS
+            Registry -->
+            <field name="target">current</field>
+        </record>
+
+        <!-- ✅ Add Dashboard to Odoo Menu -->
+        <menuitem id="menu_rfp_dashboard" name="Dashboard"
+            parent="procurement_management.menu_rfp_root"
+            action="action_rfp_dashboard"
+            groups="procurement_management.group_supplier_reviewer,procurement_management.group_supplier_approver"
+            sequence="35" />
+
+    </data>
+</odoo>

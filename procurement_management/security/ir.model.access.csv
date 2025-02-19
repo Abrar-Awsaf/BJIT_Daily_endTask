@@ -11,3 +11,6 @@ access_rfp_approver,Approver Access to RFP,model_rfp_management,procurement_mana
 access_rfp_product_line_reviewer,Reviewer Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_reviewer,1,1,1,0
 access_rfp_product_line_approver,Approver Access to RFP Product Line,model_rfp_product_line,procurement_management.group_supplier_approver,1,1,0,0
 access_rfp_product_line_admin,Administrator Access to RFP Product Line,model_rfp_product_line,base.group_system,1,1,1,1
+
+access_rfp_report_wizard_reviewer,RFP Report Wizard Reviewer Access,model_rfp_report_wizard,procurement_management.group_supplier_reviewer,1,1,0,0
+access_rfp_report_wizard_approver,RFP Report Wizard Approver Access,model_rfp_report_wizard,procurement_management.group_supplier_approver,1,1,1,0

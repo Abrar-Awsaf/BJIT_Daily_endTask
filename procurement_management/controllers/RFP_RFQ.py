@@ -110,18 +110,17 @@ class RFQPortal(CustomerPortal):
         })
         return request.render("portal.portal_my_home", values)
 
-    @http.route(['/my/rfq'], type='http', auth='user', website=True)
-    def view_rfq_list(self, **kwargs):
-        """
-        Display a list of RFQs submitted by the logged-in supplier.
-        """
-        supplier = request.env.user.partner_id
-        rfq_list = request.env['purchase.order'].sudo().search([
-            ('partner_id', '=', supplier.id),
-            ('state', 'in', ['draft', 'approved', 'rejected'])
-        ])
-        
-        return request.render('procurement_management.rfq_list_template', {
-            'rfqs': rfq_list
+    @http.route(['/my/rfq/only'], type='http', auth='user', website=True)
+    def view_rfq_list(self, **kw):
+
+        supplier = request.env.user.partner_id  
+        domain = [('partner_id', '=', supplier.id), ('state', 'in', ['draft', 'sent', 'approved', 'rejected', 'purchase', 'done', 'cancel'])]
+
+        quotations = request.env['purchase.order'].sudo().search(domain)
+
+        return request.render('procurement_management.portal_my_quotations', {
+            'quotations': quotations or [],
         })
+
+
 

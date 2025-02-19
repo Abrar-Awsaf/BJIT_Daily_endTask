@@ -59,16 +59,46 @@
             </field>
         </record>
 
+        <!-- ✅ Graph View for RFP Management -->
+        <record id="view_rfp_graph" model="ir.ui.view">
+            <field name="name">rfp.graph.view</field>
+            <field name="model">rfp.management</field>
+            <field name="arch" type="xml">
+                <graph string="RFP Overview" type="bar">
+                    <field name="expiry_date" type="row" interval="month" />
+                    <field name="total_amount" type="measure" />
+                    <field name="rfp_number" type="col" />
+                    <field name="status" type="col" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- ✅ Pivot View for RFP Management -->
+        <record id="view_rfp_pivot" model="ir.ui.view">
+            <field name="name">rfp.pivot.view</field>
+            <field name="model">rfp.management</field>
+            <field name="arch" type="xml">
+                <pivot string="RFP Analysis">
+                    <field name="approved_supplier_id" type="row" />
+                    <field name="expiry_date" type="col" interval="month" />
+                    <field name="status" type="row" />
+                    <field name="total_amount" type="measure" />
+                </pivot>
+            </field>
+        </record>
+
         <!-- Approver RFP Action (Moved to the Top) -->
         <record id="action_rfp_list_approver" model="ir.actions.act_window">
             <field name="name">Approver RFPs</field>
             <field name="res_model">rfp.management</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
             <field name="domain">[('status', '!=', 'draft')]</field>
             <field name="view_ids"
                 eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_rfp_list_approver')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_rfp_form_approver')})]" />
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_rfp_form_approver')}),
+                (0,0,{'view_mode':'graph', 'view_id':ref('view_rfp_graph')}),
+                (0,0,{'view_mode':'pivot', 'view_id':ref('view_rfp_pivot')})]" />
         </record>
 
         <!-- Approver RFP Menu -->

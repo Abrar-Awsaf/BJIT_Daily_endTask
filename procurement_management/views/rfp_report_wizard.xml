@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rfp_report_wizard" model="ir.ui.view">
+        <field name="name">rfp.report.wizard.form</field>
+        <field name="model">rfp.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate RFP Report">
+                <sheet>
+                    <!-- Title and Instructions -->
+                    <div class="oe_title"
+                        style="margin-bottom: 25px; padding: 20px; background-color: #e3f2fd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        <h2 class="text-primary"
+                            style="font-weight: 700; text-transform: uppercase; font-size: 2.5rem; color: #1976d2; letter-spacing: 1px; margin-bottom: 10px;">
+                            RFP Report Generation
+                        </h2>
+                        <p style="font-size: 1rem; color: #333; line-height: 1.6; margin-bottom: 0;">
+                            Select the criteria below to generate the RFP report for your supplier.
+                        </p>
+                    </div>
+
+                    <!-- Filter Criteria Section -->
+                    <group>
+                        <group>
+                            <field name="supplier_id" string="Supplier" required="true"
+                                placeholder="Select a supplier"
+                                class="oe_form_input"
+                                style="background-color: #f0f8ff; border: 1px solid #8e9eaf; border-radius: 8px; width: 80%; padding: 10px; font-size: 1rem;" />
+                        </group>
+                        <group>
+                            <field name="start_date" string="Start Date" required="true"
+                                class="oe_form_input"
+                                style="background-color: #f0f8ff; border: 1px solid #8e9eaf; border-radius: 8px; width: 80%; padding: 10px; font-size: 1rem;" />
+                            <field name="end_date" string="End Date" required="true"
+                                class="oe_form_input"
+                                style="background-color: #f0f8ff; border: 1px solid #8e9eaf; border-radius: 8px; width: 80%; padding: 10px; font-size: 1rem;" />
+                        </group>
+                    </group>
+
+                    <!-- Action Buttons -->
+                    <footer>
+                        <div class="oe_form_buttons">
+                            <button name="action_generate_html_report" type="object"
+                                string="📄 Generate HTML Preview"
+                                class="btn btn-primary shadow-s mt-3 px-4 py-2"
+                                style="width: 220px; font-size: 1rem;" />
+                            <!-- Excel button can be added if needed -->
+                            <button name="action_generate_excel_report" type="object"
+                                string="📊 Generate Excel Report"
+                                class="btn btn-secondary shadow-s mt-3 px-4 py-2"
+                                style="width: 220px; font-size: 1rem;" />
+
+                        </div>
+                    </footer>
+                </sheet>
+
+                <!-- (Optional) Custom CSS/Animations -->
+                <style>
+                    @keyframes fadeIn {
+                    0% { opacity: 0; transform: translateY(20px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                    }
+                    @keyframes slideIn {
+                    0% { opacity: 0; transform: translateX(-30px); }
+                    100% { opacity: 1; transform: translateX(0); }
+                    }
+                    .oe_form_input {
+                    background-color: #f0f8ff;
+                    border: 1px solid #8e9eaf;
+                    border-radius: 8px;
+                    width: 80%;
+                    padding: 10px;
+                    font-size: 1rem;
+                    transition: border-color 0.3s ease;
+                    }
+                    .oe_form_input:focus {
+                    border-color: #1976d2;
+                    outline: none;
+                    }
+                    button {
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    padding: 10px 15px;
+                    transition: background-color 0.3s ease;
+                    }
+                    button:hover {
+                    background-color: #1976d2;
+                    color: white;
+                    }
+                </style>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for opening the wizard -->
+    <record id="action_rfp_report_wizard" model="ir.actions.act_window">
+        <field name="name">RFP Report</field>
+        <field name="res_model">rfp.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item (optional) -->
+    <menuitem id="menu_rfp_report"
+        name="RFP Reports"
+        parent="procurement_management.menu_rfp_root"
+        action="action_rfp_report_wizard"
+        groups="procurement_management.group_supplier_reviewer,procurement_management.group_supplier_approver" />
+</odoo>

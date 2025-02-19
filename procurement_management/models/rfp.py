@@ -55,7 +55,6 @@ class RFP(models.Model):
         help="The RFQ selected by the approver for purchase order creation."
     )
 
-
     @api.depends('rfq_line_ids.recommended')
     def _compute_recommended_rfq_lines(self):
         """ Compute only recommended RFQs """
@@ -75,14 +74,14 @@ class RFP(models.Model):
                 'parent.id.sequence') or _("New")
         return super(RFP, self).create(vals)
     
-    @api.depends('rfq_line_ids.amount_total')
+    @api.depends('selected_rfq_id.amount_total')
     def _compute_total_amount(self):
         """
-        Compute total amount based on the accepted RFQ lines.
+        Compute the total amount based only on the selected RFQ.
         """
         for rfp in self:
-            accepted_rfq = rfp.rfq_line_ids.filtered(lambda rfq: rfq.state == 'approved')
-            rfp.total_amount = sum(accepted_rfq.mapped('amount_total'))
+            # If a final RFQ is selected, use its total amount; otherwise, default to 0.0.
+            rfp.total_amount = rfp.selected_rfq_id.amount_total if rfp.selected_rfq_id else 0.0
     
     # Reviewer Actions
     def action_submit(self):
@@ -122,30 +121,17 @@ class RFP(models.Model):
         self.write({'status': 'closed'})
 
     def action_accept(self):
-        """ Accept RFP and create PO from the Selected RFQ """
         if not self.selected_rfq_id:
             raise exceptions.UserError("Please select one RFQ to accept.")
-
-        # Create PO from the selected RFQ
-        po = self.env['purchase.order'].create({
-            'partner_id': self.selected_rfq_id.partner_id.id,
-            'rfp_id': self.id,
-            'order_line': [(0, 0, {
-                'product_id': line.product_id.id,
-                'name': line.name,  # ✅ Ensured correct field reference
-                'product_qty': line.product_qty,
-                'price_unit': line.price_unit,
-                'date_planned': fields.Date.today(),
-            }) for line in self.selected_rfq_id.order_line]
-        })
-
-        # ✅ Change the RFQ status to "Purchase Order"
         self.selected_rfq_id.write({'state': 'purchase'})
+        # Set the approved supplier field properly
+        self.write({
+            'status': 'accepted',
+            'approved_supplier_id': self.selected_rfq_id.partner_id.id
+        })
+        
+    
 
-        # ✅ Update RFP status to "accepted"
-        self.write({'status': 'accepted'})
-
-        return po
 
 
 

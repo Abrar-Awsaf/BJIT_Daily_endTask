@@ -1,69 +1,106 @@
 <odoo>
     <data>
-        <!-- Portal Entry for RFPs in Portal Menu -->
-        <!-- <template id="portal_rfq_list" inherit_id="portal.portal_my_home">
+        <!-- ✅ Portal Menu Entry for "My Quotations" -->
+        <template id="portal_rfq_list" inherit_id="portal.portal_my_home">
             <xpath expr="//div[@id='portal_vendor_category']" position="inside">
                 <t t-call="portal.portal_docs_entry">
                     <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'" />
-                    <t t-set="title">Submitted RFQ's</t>
-                    <t t-set="text">View for Submit Quotations</t>
-                    <t t-set="url" t-value="'/my/rfq'" />
+                    <t t-set="title">My Quotations</t>
+                    <t t-set="text">View and Manage Your Submitted RFQs</t>
+                    <t t-set="url" t-value="'/my/rfq/only'" />
                     <t t-set="config_card" t-value="True" />
                 </t>
             </xpath>
         </template>
-
-        <template id="rfq_list_template" name="My RFQs">
+        <!-- ✅ My Quotations List -->
+        <template id="portal_my_quotations" name="My Quotations">
             <t t-call="portal.portal_layout">
-                <div class="container mt-4">
-                    <h2 class="text-center text-primary">My Submitted RFQs</h2>
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>RFQ Number</th>
-                                <th>RFP Reference</th>
-                                <th>Status</th>
-                                <th>Total Price</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-if="rfqs">
-                                <t t-foreach="rfqs" t-as="rfq">
-                                    <tr>
-                                        <td>
-                                            <t t-esc="rfq.name" />
-                                        </td>
-                                        <td>
-                                            <t t-esc="rfq.rfp_id.rfp_number" />
-                                        </td>
-                                        <td>
-                                            <t t-if="rfq.state == 'draft'">Pending</t>
-                                            <t t-elif="rfq.state == 'approved'">Approved</t>
-                                            <t t-elif="rfq.state == 'rejected'">Rejected</t>
-                                        </td>
-                                        <td><t t-esc="rfq.amount_total" /> USD</td>
-                                        <td>
-                                            <a t-att-href="'/my/rfq/view/' + str(rfq.id)"
-                                                class="btn btn-sm btn-primary">
-                                                View
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </t>
-                            <t t-else="">
+                <!-- Searchbar -->
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">RFP</t>
+                </t>
+
+                <!-- ✅ Always Show Table Structure -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="active">
+                            <th>RFP Reference</th>
+                            <th>Submission Date</th>
+                            <th>Expected Delivery</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Document Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="quotations">
+                            <t t-foreach="quotations" t-as="quotation">
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted">
-                                        No RFQs found.
+                                    <td>
+                                        <a t-attf-href="/my/rfp/#{quotation.rfp_id.id}">
+                                            <t t-esc="quotation.rfp_id.rfp_number" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span t-field="quotation.create_date"
+                                            t-options='{"widget": "date"}' />
+                                    </td>
+                                    <td>
+                                        <span t-field="quotation.expected_delivery_date" />
+                                    </td>
+                                    <td>
+                                        <span t-field="quotation.amount_total"
+                                            t-options='{"widget": "monetary", "display_currency": quotation.currency_id}' />
+                                    </td>
+                                    <td>
+                                        <t t-if="quotation.state == 'purchase'">
+                                            <span class="badge bg-success">Accepted</span>
+                                        </t>
+                                        <t t-elif="quotation.recommended">
+                                            <span class="badge bg-warning">Recommended</span>
+                                        </t>
+                                        <t t-elif="quotation.state == 'draft'">
+                                            <span class="badge bg-info">New</span>
+                                        </t>
+                                        <t t-elif="quotation.state == 'sent'">
+                                            <span class="badge bg-warning">Sent</span>
+                                        </t>
+                                        <t t-elif="quotation.state == 'done'">
+                                            <span class="badge bg-primary">Done</span>
+                                        </t>
+                                        <t t-elif="quotation.state == 'cancel'">
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-if="quotation.state == 'purchase'">
+                                            <span class="badge bg-primary">Purchase Order</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge bg-info">Request for Quotation</span>
+                                        </t>
                                     </td>
                                 </tr>
                             </t>
-                        </tbody>
-                    </table>
-                </div>
+                        </t>
+                        <t t-else="">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    No RFQs found.
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <!-- ✅ Pagination -->
+                <!-- <t t-if="pager">
+                    <div class="text-center">
+                        <t t-call="portal.portal_pager" t-set="pager" />
+                    </div>
+                </t> -->
             </t>
-        </template> -->
+        </template>
     </data>
 </odoo>

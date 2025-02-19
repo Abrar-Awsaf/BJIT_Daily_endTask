@@ -1,0 +1,67 @@
+<template xml:space="preserve">
+    <t t-name="procurement_management.rfp_dashboard_template" owl="1">
+        <section class="dashboard-container">
+            <h1>📊 RFP Dashboard</h1>
+
+            <!-- Supplier Selection -->
+            <div class="dashboard-section">
+                <h3>Select Supplier</h3>
+                <select t-on-change="onSupplierChange">
+                    <option value="">Select Supplier</option>
+                    <t t-foreach="state.suppliers" t-as="supplier" t-key="supplier.id">
+                        <option t-esc="supplier.name" t-att-value="supplier.id"/>
+                    </t>
+                </select>
+                <p>Selected Supplier ID: <strong t-esc="state.selectedSupplier"/></p>
+            </div>
+
+            <!-- Date Range Selection -->
+            <div class="dashboard-section">
+                <h3>Select Date Range</h3>
+                <select t-on-change="onDateRangeChange">
+                    <option value="this_week">This Week</option>
+                    <option value="last_week">Last Week</option>
+                    <option value="last_month">Last Month</option>
+                    <option value="last_year">Last Year</option>
+                    <option value="custom_range">Custom Range</option>
+                </select>
+
+                <!-- Custom Date Picker (Only Visible if Custom Range is Selected) -->
+                <div t-if="state.selectedDateRange === 'custom_range'">
+                    <label for="start_date">Start Date: </label>
+                    <input type="date" id="start_date" t-model="state.startDate" t-on-change="onCustomDateChange"/>
+
+                    <label for="end_date">End Date: </label>
+                    <input type="date" id="end_date" t-model="state.endDate" t-on-change="onCustomDateChange"/>
+                </div>
+                
+                <p>Selected Date Range: <strong t-esc="state.selectedDateRange"/></p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="dashboard-metrics">
+                <div class="metric-card">
+                    <h3>📑 Approved RFQs</h3>
+                    <p><strong t-esc="state.keyMetrics.totalApprovedRFQs"/></p>
+                </div>
+                <div class="metric-card">
+                    <h3>💰 Total RFQ Amount</h3>
+                    <p><strong t-esc="state.keyMetrics.totalAmount"/> USD</p>
+                </div>
+                <div class="metric-card">
+                    <h3>📦 Product-Wise Breakdown</h3>
+                    <ul>
+                        <t t-if="state.keyMetrics.products &amp;&amp; state.keyMetrics.products.length > 0">
+                            <t t-foreach="state.keyMetrics.products" t-as="product" t-key="product.name">
+                                <li><strong t-esc="product.name"/>: <span t-esc="product.quantity"/></li>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <p>No product data available for the selected period.</p>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </t>
+</template>

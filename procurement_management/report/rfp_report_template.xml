@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rfp_report_html_template" name="RFP Supplier Report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="container">
+
+                    <!-- ✅ Section 1: Company Logo & Supplier Information -->
+                    <t t-set="company" t-value="request.env.company" />
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <t t-if="company.logo">
+                            <img t-att-src="'data:image/png;base64,%s' % company.logo.decode()"
+                                style="max-width: 120px;" />
+                        </t>
+                    </div>
+                    <hr style="border-top: 2px solid #000; margin: 10px 0;" />
+                    <h3 style="text-align: center; color: blue;">
+                        <t t-esc="doc.supplier_id.name or 'Vendor Report'" />
+                    </h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <strong>Email:</strong>
+                            </td>
+                            <td t-esc="doc.supplier_id.email or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Phone:</strong>
+                            </td>
+                            <td t-esc="doc.supplier_id.phone or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Address:</strong>
+                            </td>
+                            <td t-esc="doc.supplier_id.company_registered_address or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>TIN:</strong>
+                            </td>
+                            <td t-esc="doc.supplier_id.tax_identification_number or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Trade License No.:</strong>
+                            </td>
+                            <td t-esc="doc.supplier_id.trade_license_number or 'N/A'" />
+                        </tr>
+                    </table>
+
+                    <!-- ✅ Bank Information (Always Displayed) -->
+                    <h4 style="text-align: center; color: #1976d2; margin-top: 15px;">Bank
+                        Information</h4>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <strong>Bank Name:</strong>
+                            </td>
+                            <td
+                                t-esc="doc.supplier_id.bank_ids and doc.supplier_id.bank_ids[0].bank_id.name or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Account Name:</strong>
+                            </td>
+                            <td
+                                t-esc="doc.supplier_id.bank_ids and doc.supplier_id.bank_ids[0].acc_holder_name or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Account Number:</strong>
+                            </td>
+                            <td
+                                t-esc="doc.supplier_id.bank_ids and doc.supplier_id.bank_ids[0].acc_number or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>IBAN:</strong>
+                            </td>
+                            <td
+                                t-esc="doc.supplier_id.bank_ids and doc.supplier_id.bank_ids[0].bank_id.iban or 'N/A'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>SWIFT Code:</strong>
+                            </td>
+                            <td
+                                t-esc="doc.supplier_id.bank_ids and doc.supplier_id.bank_ids[0].bank_id.bank_swift_code or 'N/A'" />
+                        </tr>
+                    </table>
+
+                    <!-- ✅ Section 2: Approved RFPs -->
+                    <h3>Approved RFPs</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>RFP Number</th>
+                                <th>Creation Date</th>
+                                <th>Expiry Date</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="approved_rfps"
+                                t-value="doc.env['rfp.management'].search([
+                                    ('approved_supplier_id', '=', doc.supplier_id.id),
+                                    ('status', '=', 'accepted'),
+                                    ('expiry_date', '>=', doc.start_date),
+                                    ('expiry_date', '&lt;=', doc.end_date)
+                                ])" />
+                            <t t-set="net_total" t-value="0" />
+                            <t t-foreach="approved_rfps" t-as="rfp">
+                                <tr>
+                                    <td t-esc="rfp.rfp_number" />
+                                    <td t-esc="rfp.create_date.strftime('%d/%m/%Y')" />
+                                    <td t-esc="rfp.expiry_date.strftime('%d/%m/%Y')" />
+                                    <td t-esc="rfp.total_amount" />
+                                    <t t-set="net_total" t-value="net_total + rfp.total_amount" />
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="3" style="text-align: right; font-weight: bold;">Net
+                                    Total</td>
+                                <td t-esc="net_total" style="font-weight: bold;" />
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- ✅ Section 3: Grouped Product Line Summary -->
+                    <h3>Product Line Summary</h3>
+
+                    <!-- ✅ Fetch Product Lines -->
+                    <t t-set="product_lines"
+                        t-value="doc.env['rfp.product.line'].search([('rfp_id.approved_supplier_id', '=', doc.supplier_id.id)])" />
+
+                    <!-- ✅ If Product Lines Exist, Display Table -->
+                    <t t-if="product_lines">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Total Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Delivery Charge</th>
+                                    <th>Subtotal Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="product_lines" t-as="line">
+                                    <tr>
+                                        <td t-esc="line.product_id.name or 'No Name'" />
+                                        <td t-esc="line.quantity or '0'" />
+                                        <td t-esc="line.supplier_unit_price or '0.00'" />
+                                        <td t-esc="line.delivery_charges_supplier or '0.00'" />
+                                        <td t-esc="line.supplier_total_price or '0.00'" />
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <!-- ✅ Instead of `<t t-else="">`, Use a Safe Message -->
+                    <p t-if="not product_lines" style="color: orange; text-align: center;">
+                        ⚠ No product lines found for the selected supplier.
+                    </p>
+
+                    <!-- ✅ Section 4 Will Now Always Render Below -->
+                    <h3>Company Contact Information</h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <strong>Email:</strong>
+                            </td>
+                            <td t-esc="company.email or 'No Email Available'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Phone:</strong>
+                            </td>
+                            <td t-esc="company.phone or 'No Phone Available'" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Address:</strong>
+                            </td>
+                            <td t-esc="company.partner_id.contact_address or 'No Address Available'" />
+                        </tr>
+                    </table>
+
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="report_action_rfp_supplier" model="ir.actions.report">
+        <field name="name">RFP Supplier Report</field>
+        <field name="model">rfp.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">procurement_management.rfp_report_html_template</field>
+        <field name="report_file">procurement_management.rfp_report_html_template</field>
+        <field name="attachment_use">False</field>
+    </record>
+</odoo>

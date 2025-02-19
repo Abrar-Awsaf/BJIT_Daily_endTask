@@ -1,0 +1,46 @@
+/* Dark Mode Styling */
+.dashboard-container {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-section {
+    margin-bottom: 20px;
+}
+
+.dashboard-metrics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+    width: 45%;
+    text-align: center;
+}
+
+.button-group button {
+    margin: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .dashboard-metrics {
+        flex-direction: column;
+    }
+
+    .metric-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

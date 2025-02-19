@@ -35,11 +35,21 @@ Long description of module's purpose
         'views/approver_rfp.xml',
         'views/rfp_list_template.xml',
         'views/rfq_submission_template.xml',
-        # 'views/submitted_rfq_portal_view.xml',
+        'views/submitted_rfq_portal_view.xml',
+        'views/rfp_report_wizard.xml',
+        'report/rfp_report_template.xml',
+        'views/rfp_dashboard.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            # 'https://cdn.jsdelivr.net/npm/chart.js',
+            'procurement_management/static/src/xml/rfp_dashboard_template.xml',
+            'procurement_management/static/src/js/rfp_dashboard.js',
+        ],
+    },
 }
 

@@ -14,6 +14,8 @@ class RFQ(models.Model):
     recommended = fields.Boolean(string='Recommended')
 
     rfq_product_line_ids = fields.One2many('purchase.order.line', 'order_id', string='RFQ Product Lines')
+    
+    amount_total = fields.Monetary(string="Total Amount", compute="_compute_total_price", store=True, currency_field="currency_id")
 
     @api.depends('order_line.price_unit', 'order_line.product_qty', 'order_line.delivery_charges_supplier')
     def _compute_total_price(self):
@@ -21,7 +23,10 @@ class RFQ(models.Model):
         Compute total RFQ price from product lines.
         """
         for order in self:
-            total = sum((line.price_unit * line.product_qty) + (line.delivery_charges_supplier or 0) for line in order.order_line)
+            total = sum(
+                (line.price_unit * line.product_qty) + (line.delivery_charges_supplier or 0)
+                for line in order.order_line
+            )
             order.amount_total = total
 
     @api.model
@@ -92,9 +97,10 @@ class RFQ(models.Model):
         if existing_approved_rfq:
             raise ValidationError("An RFQ has already been approved for this RFP.")
 
-        self.state = 'approved'
+        # self.state = 'approved' 
+        self.rfp_id._compute_total_amount()
 
 class RFQProductLine(models.Model):
-    _inherit = 'purchase.order.line'  # Extending RFQ Product Lines
+    _inherit = 'purchase.order.line'
     
-    delivery_charges_supplier = fields.Float(string="Supplier Delivery Charges")  # ✅ Corrected
+    delivery_charges_supplier = fields.Float(string="Supplier Delivery Charges")

@@ -86,7 +86,7 @@
         <record id="action_rfp_list" model="ir.actions.act_window">
             <field name="name">RFPs</field>
             <field name="res_model">rfp.management</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
             <field name="domain">[('create_uid', '=', uid)]</field>
             <field name="view_ids"
                 eval="[
@@ -97,9 +97,10 @@
         </record>
 
         <!-- RFP Menu for Reviewers -->
-        <menuitem id="menu_rfp_root" name="RFP Management" sequence="10" />
-        <menuitem id="menu_rfp" name="RFPs" parent="menu_rfp_root" action="action_rfp_list"
-            groups="procurement_management.group_supplier_reviewer" />
+        <!-- <menuitem id="menu_rfp_root" name="RFP Management" sequence="10" /> -->
+        <menuitem id="menu_rfp" name="RFPs" parent="procurement_management.menu_rfp_root"
+            action="action_rfp_list"
+            groups="procurement_management.group_supplier_reviewer" sequence="10" />
 
     </data>
 </odoo>
